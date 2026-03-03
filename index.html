@@ -8,7 +8,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
 
   <!-- GSAP + ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -20,6 +20,7 @@
        ═══════════════════════════════════════════ */
     :root {
       --black: #0a0a0a;
+      --deep-black: #050505;
       --dark: #121212;
       --dark-secondary: #1a1a1a;
       --dark-card: #161616;
@@ -28,6 +29,7 @@
       --blue: #1f6db7;
       --blue-glow: rgba(31, 109, 183, 0.3);
       --blue-hover: #2580d4;
+      --red: #ff0000;
       --font-heading: 'Bebas Neue', sans-serif;
       --font-body: 'Inter', sans-serif;
     }
@@ -49,6 +51,12 @@
       color: var(--white);
       overflow-x: hidden;
       line-height: 1.6;
+      cursor: none;
+    }
+
+    /* Restore cursor on touch devices */
+    @media (pointer: coarse) {
+      body { cursor: auto; }
     }
 
     a { color: inherit; text-decoration: none; }
@@ -58,6 +66,48 @@
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 24px;
+    }
+
+    /* ═══════════════════════════════════════════
+       CUSTOM MAGNETIC CURSOR
+       ═══════════════════════════════════════════ */
+    #custom-cursor {
+      position: fixed;
+      width: 15px;
+      height: 15px;
+      background: var(--white);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s, height 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #custom-cursor .cursor-text {
+      display: none;
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #000;
+      white-space: nowrap;
+    }
+
+    #custom-cursor.expanded {
+      width: 90px;
+      height: 90px;
+    }
+
+    #custom-cursor.expanded .cursor-text {
+      display: block;
+    }
+
+    @media (pointer: coarse) {
+      #custom-cursor { display: none; }
     }
 
     /* ═══════════════════════════════════════════
@@ -125,6 +175,45 @@
       transform: translateY(-1px);
     }
 
+    /* ── Live Indicator ── */
+    .live-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      padding: 5px 14px;
+      border-radius: 20px;
+      background: rgba(255, 0, 0, 0.1);
+      border: 1px solid rgba(255, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .live-indicator:hover {
+      background: rgba(255, 0, 0, 0.2);
+      border-color: var(--red);
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--red);
+      border-radius: 50%;
+      animation: livePulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes livePulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.6); opacity: 0.4; }
+    }
+
+    .live-text {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--red);
+    }
+
     /* Mobile nav toggle */
     .nav__toggle {
       display: none;
@@ -156,7 +245,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(10, 10, 10, 0.97);
+        background: rgba(5, 5, 5, 0.98);
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -164,9 +253,11 @@
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.4s;
+        z-index: 200;
       }
       .nav__links.open { opacity: 1; pointer-events: all; }
-      .nav__links a { font-size: 1.2rem; }
+      .nav__links a { font-size: 1.4rem; letter-spacing: 3px; }
+      .live-indicator { order: -1; }
     }
 
     /* ═══════════════════════════════════════════
@@ -186,10 +277,9 @@
       inset: 0;
       background:
         radial-gradient(ellipse at 30% 50%, rgba(31, 109, 183, 0.08) 0%, transparent 60%),
-        linear-gradient(180deg, var(--black) 0%, var(--dark) 100%);
+        linear-gradient(180deg, var(--deep-black) 0%, var(--dark) 100%);
     }
 
-    /* Animated film grain overlay */
     .hero__grain {
       position: absolute;
       inset: 0;
@@ -203,7 +293,7 @@
       position: relative;
       text-align: center;
       padding: 0 24px;
-      max-width: 900px;
+      max-width: 960px;
     }
 
     .hero__overtitle {
@@ -217,13 +307,14 @@
       opacity: 0;
     }
 
+    /* v2: Tight editorial tracking like Coffee & TV */
     .hero__title {
       font-family: var(--font-heading);
-      font-size: clamp(4rem, 12vw, 9rem);
-      letter-spacing: 14px;
-      line-height: 0.95;
+      font-size: clamp(5rem, 15vw, 11rem);
+      letter-spacing: -0.04em;
+      line-height: 0.85;
       color: var(--white);
-      margin-bottom: 24px;
+      margin-bottom: 28px;
       opacity: 0;
     }
 
@@ -448,10 +539,11 @@
       height: 3px;
       border-radius: 2px;
       background: rgba(245, 245, 245, 0.1);
-      transition: background 0.4s;
+      transition: background 0.4s, opacity 0.3s;
     }
 
     .qual__progress-dot.filled { background: var(--blue); }
+    .qual__progress-dot.hidden { opacity: 0; width: 0; overflow: hidden; margin: 0; padding: 0; }
 
     /* Option cards */
     .qual__options {
@@ -494,6 +586,11 @@
       background: rgba(31, 109, 183, 0.08);
     }
 
+    /* Tactile tap feedback on mobile */
+    .qual__card:active {
+      transform: scale(0.98);
+    }
+
     .qual__card-icon {
       font-size: 2rem;
       margin-bottom: 12px;
@@ -523,10 +620,12 @@
       margin-top: 4px;
     }
 
-    /* Step 4: Summary */
+    /* v2: Glassmorphism summary */
     .qual__summary {
-      background: var(--dark-card);
-      border: 1px solid rgba(245, 245, 245, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 12px;
       padding: 40px;
       text-align: center;
@@ -550,6 +649,28 @@
 
     .qual__summary-label { color: var(--white-muted); }
     .qual__summary-value { font-weight: 600; color: var(--white); }
+
+    .qual__summary-strategy {
+      margin-top: 8px;
+      padding: 12px 20px;
+      background: rgba(31, 109, 183, 0.08);
+      border: 1px solid rgba(31, 109, 183, 0.2);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: var(--blue);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      display: none;
+    }
+
+    .qual__summary-strategy.visible { display: block; }
+
+    .qual__summary-live-btn {
+      display: none;
+      margin-top: 12px;
+    }
+
+    .qual__summary-live-btn.visible { display: inline-flex; }
 
     .qual__back {
       display: inline-block;
@@ -586,17 +707,12 @@
       aspect-ratio: 16/10;
       background: var(--dark-card);
       cursor: pointer;
-      group: true;
+      will-change: transform;
     }
 
-    .work__card-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s ease, filter 0.6s;
-    }
+    /* Tactile tap on mobile */
+    .work__card:active { transform: scale(0.98); }
 
-    /* Placeholder gradient for demo */
     .work__card-placeholder {
       position: absolute;
       inset: 0;
@@ -636,8 +752,10 @@
       transition: opacity 0.4s;
     }
 
-    .work__card:hover .work__card-overlay { opacity: 1; }
-    .work__card:hover .work__card-img { transform: scale(1.05); filter: brightness(0.7); }
+    /* Desktop hover reveal */
+    @media (pointer: fine) {
+      .work__card:hover .work__card-overlay { opacity: 1; }
+    }
 
     .work__card-category {
       font-size: 0.7rem;
@@ -658,11 +776,6 @@
       font-size: 0.85rem;
       color: var(--white-muted);
       margin-top: 4px;
-    }
-
-    /* Scale on scroll - Coffee & TV signature */
-    .work__card {
-      will-change: transform;
     }
 
     @media (max-width: 640px) {
@@ -695,6 +808,8 @@
       transform: translateY(-4px);
       border-color: rgba(245, 245, 245, 0.12);
     }
+
+    .rental-card:active { transform: scale(0.98); }
 
     .rental-card__img {
       position: relative;
@@ -730,24 +845,11 @@
       text-transform: uppercase;
     }
 
-    .rental-card__badge--popular {
-      background: var(--blue);
-      color: var(--white);
-    }
+    .rental-card__badge--popular { background: var(--blue); color: var(--white); }
+    .rental-card__badge--value { background: #2ecc71; color: #000; }
+    .rental-card__badge--limited { background: #e74c3c; color: var(--white); }
 
-    .rental-card__badge--value {
-      background: #2ecc71;
-      color: #000;
-    }
-
-    .rental-card__badge--limited {
-      background: #e74c3c;
-      color: var(--white);
-    }
-
-    .rental-card__body {
-      padding: 20px;
-    }
+    .rental-card__body { padding: 20px; }
 
     .rental-card__name {
       font-family: var(--font-heading);
@@ -813,6 +915,204 @@
 
     @media (max-width: 640px) {
       .rentals__grid { grid-template-columns: 1fr; }
+    }
+
+    /* ═══════════════════════════════════════════
+       SECTION: FOUNDER'S VISION
+       ═══════════════════════════════════════════ */
+    .founder {
+      padding: 150px 0;
+      background: var(--black);
+      border-top: 1px solid rgba(245, 245, 245, 0.05);
+    }
+
+    .founder__grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .founder__portrait {
+      aspect-ratio: 4/5;
+      background: var(--dark-card);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: grayscale(1);
+      border: 1px solid rgba(245, 245, 245, 0.06);
+      overflow: hidden;
+    }
+
+    .founder__portrait-placeholder {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      letter-spacing: 3px;
+      color: var(--white-muted);
+      text-align: center;
+      padding: 20px;
+    }
+
+    .founder__name {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+    }
+
+    .founder__role {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 24px;
+    }
+
+    .founder__quote {
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--white-muted);
+      line-height: 1.8;
+      margin-bottom: 16px;
+      max-width: 500px;
+    }
+
+    .founder__bio {
+      font-size: 0.9rem;
+      color: var(--white-muted);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      max-width: 500px;
+    }
+
+    .founder__stats {
+      display: flex;
+      gap: 48px;
+    }
+
+    .founder__stat-number {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      color: var(--blue);
+      letter-spacing: 1px;
+      line-height: 1;
+    }
+
+    .founder__stat-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--white-muted);
+      margin-top: 6px;
+    }
+
+    @media (max-width: 768px) {
+      .founder__grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        text-align: center;
+      }
+      .founder__portrait { max-width: 300px; margin: 0 auto; }
+      .founder__quote, .founder__bio { margin-left: auto; margin-right: auto; }
+      .founder__stats { justify-content: center; gap: 32px; }
+    }
+
+    /* ═══════════════════════════════════════════
+       LIVE OVERLAY
+       ═══════════════════════════════════════════ */
+    .live-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 5, 5, 0.96);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .live-overlay.open { display: flex; }
+
+    .live-overlay__close {
+      position: absolute;
+      top: 32px;
+      right: 40px;
+      background: none;
+      border: none;
+      color: var(--white-muted);
+      font-size: 2rem;
+      cursor: pointer;
+      transition: color 0.3s;
+      font-family: var(--font-body);
+      line-height: 1;
+    }
+
+    .live-overlay__close:hover { color: var(--white); }
+
+    .live-overlay__content {
+      text-align: center;
+      max-width: 700px;
+    }
+
+    .live-overlay__status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 20px;
+      border-radius: 24px;
+      background: rgba(255, 0, 0, 0.1);
+      border: 1px solid rgba(255, 0, 0, 0.3);
+      margin-bottom: 32px;
+    }
+
+    .live-overlay__viewport {
+      aspect-ratio: 16/9;
+      max-width: 100%;
+      background: var(--dark-card);
+      border-radius: 8px;
+      border: 1px solid rgba(245, 245, 245, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+
+    .live-overlay__lock {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+
+    .live-overlay__private-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      letter-spacing: 4px;
+      margin-bottom: 12px;
+      animation: securePulse 3s ease-in-out infinite;
+    }
+
+    @keyframes securePulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* Founder signature placeholder */
+    .founder__signature {
+      font-family: 'Mrs Saint Delafield', cursive;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--blue);
+      margin-top: 24px;
+      opacity: 0.8;
+    }
+
+    .live-overlay__private-desc {
+      font-size: 0.9rem;
+      color: var(--white-muted);
+      line-height: 1.7;
+      max-width: 500px;
+      margin: 0 auto;
     }
 
     /* ═══════════════════════════════════════════
@@ -906,10 +1206,7 @@
     }
 
     @media (max-width: 768px) {
-      .footer__top {
-        grid-template-columns: 1fr 1fr;
-        gap: 32px;
-      }
+      .footer__top { grid-template-columns: 1fr 1fr; gap: 32px; }
     }
 
     @media (max-width: 480px) {
@@ -918,16 +1215,13 @@
     }
 
     /* ═══════════════════════════════════════════
-       UTILITY: REVEAL ANIMATIONS
+       UTILITY
        ═══════════════════════════════════════════ */
     .reveal {
       opacity: 0;
       transform: translateY(40px);
     }
 
-    /* ═══════════════════════════════════════════
-       SELECTION STYLE
-       ═══════════════════════════════════════════ */
     ::selection {
       background: var(--blue);
       color: var(--white);
@@ -935,6 +1229,9 @@
   </style>
 </head>
 <body>
+
+  <!-- Custom Cursor (hidden on touch) -->
+  <div id="custom-cursor"><span class="cursor-text">VIEW</span></div>
 
   <!-- ════════════════════════════════════════
        NAVIGATION
@@ -949,6 +1246,12 @@
         <li><a href="#work">Work</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#rentals">Rentals</a></li>
+        <li>
+          <div class="live-indicator" id="liveIndicator" onclick="toggleLiveOverlay()">
+            <span class="live-dot"></span>
+            <span class="live-text">LIVE</span>
+          </div>
+        </li>
         <li><a href="#contact" class="nav__cta">Get Started</a></li>
       </ul>
     </div>
@@ -1006,8 +1309,9 @@
 
       <div class="qual" id="qual">
         <!-- Progress -->
-        <div class="qual__progress">
+        <div class="qual__progress" id="qualProgress">
           <div class="qual__progress-dot filled" data-step="1"></div>
+          <div class="qual__progress-dot hidden" data-step="1.5"></div>
           <div class="qual__progress-dot" data-step="2"></div>
           <div class="qual__progress-dot" data-step="3"></div>
           <div class="qual__progress-dot" data-step="4"></div>
@@ -1045,6 +1349,39 @@
           </div>
         </div>
 
+        <!-- Step 1.5: Scale Brand Sub-Options -->
+        <div class="qual__step" data-step="1.5">
+          <h3 class="qual__question">What Kind of Brand Growth?</h3>
+          <p class="qual__step-label">Choose your strategy</p>
+          <div class="qual__options">
+            <div class="qual__card" data-value="Innovation Launch" onclick="selectBrandStrategy(this)">
+              <div class="qual__card-icon">🚀</div>
+              <div class="qual__card-title">Innovation Launch</div>
+              <div class="qual__card-stat">Market Leadership for New IP</div>
+              <div class="qual__card-desc">Cinematic storytelling for global tech leaders like Meta & Amazon</div>
+            </div>
+            <div class="qual__card" data-value="Visionary Series" onclick="selectBrandStrategy(this)">
+              <div class="qual__card-icon">🎬</div>
+              <div class="qual__card-title">Visionary Series</div>
+              <div class="qual__card-stat">Documentary-Style Authority</div>
+              <div class="qual__card-desc">High-trust narratives for the United Nations & Columbia</div>
+            </div>
+            <div class="qual__card" data-value="Multi-Platform Dominance" onclick="selectBrandStrategy(this)">
+              <div class="qual__card-icon">📱</div>
+              <div class="qual__card-title">Multi-Platform</div>
+              <div class="qual__card-stat">1 Hero Film + 10 Social Cuts</div>
+              <div class="qual__card-desc">Saturate LinkedIn, YouTube & Broadcast with unified premium identity</div>
+            </div>
+            <div class="qual__card" data-value="Global Enterprise Suite" onclick="selectBrandStrategy(this)">
+              <div class="qual__card-icon">🌍</div>
+              <div class="qual__card-title">Global Enterprise</div>
+              <div class="qual__card-stat">Unified International Narrative</div>
+              <div class="qual__card-desc">Consistent elite quality across NYC, London & beyond</div>
+            </div>
+          </div>
+          <button class="qual__back" onclick="goBack(1)">&larr; Back</button>
+        </div>
+
         <!-- Step 2: Timeline -->
         <div class="qual__step" data-step="2">
           <h3 class="qual__question">What's Your Timeline?</h3>
@@ -1071,7 +1408,7 @@
               <div class="qual__card-desc">No date yet</div>
             </div>
           </div>
-          <button class="qual__back" onclick="goBack(1)">&larr; Back</button>
+          <button class="qual__back" onclick="goBack(qualState.objective === 'Scale Brand' ? 1.5 : 1)">&larr; Back</button>
         </div>
 
         <!-- Step 3: Budget -->
@@ -1121,7 +1458,9 @@
                 <span class="qual__summary-value" id="sumBudget">—</span>
               </li>
             </ul>
-            <a href="#contact" class="btn btn--primary" id="sumCta">Book a Strategy Session</a>
+            <div class="qual__summary-strategy" id="sumStrategy"></div>
+            <a href="#contact" class="btn btn--primary" id="sumCta" style="margin-top:24px">Book a Strategy Session</a>
+            <button class="btn btn--ghost qual__summary-live-btn" id="sumLiveBtn" onclick="toggleLiveOverlay()" style="margin-top:12px">View Live Production Specs</button>
             <p style="margin-top:16px; font-size:0.8rem; color:var(--white-muted);">
               We'll respond within 2 business hours
             </p>
@@ -1192,7 +1531,6 @@
       </div>
 
       <div class="rentals__grid">
-        <!-- Card 1 -->
         <div class="rental-card reveal">
           <div class="rental-card__img">
             <div class="rental-card__placeholder rental-card__placeholder--cam">🎥</div>
@@ -1208,7 +1546,6 @@
           </div>
         </div>
 
-        <!-- Card 2 -->
         <div class="rental-card reveal">
           <div class="rental-card__img">
             <div class="rental-card__placeholder rental-card__placeholder--lens">🔭</div>
@@ -1224,7 +1561,6 @@
           </div>
         </div>
 
-        <!-- Card 3 -->
         <div class="rental-card reveal">
           <div class="rental-card__img">
             <div class="rental-card__placeholder rental-card__placeholder--light">💡</div>
@@ -1240,7 +1576,6 @@
           </div>
         </div>
 
-        <!-- Card 4 -->
         <div class="rental-card reveal">
           <div class="rental-card__img">
             <div class="rental-card__placeholder rental-card__placeholder--studio">🏢</div>
@@ -1257,7 +1592,6 @@
           </div>
         </div>
 
-        <!-- Card 5 -->
         <div class="rental-card reveal">
           <div class="rental-card__img">
             <div class="rental-card__placeholder rental-card__placeholder--drone">🚁</div>
@@ -1274,7 +1608,6 @@
           </div>
         </div>
 
-        <!-- Card 6 -->
         <div class="rental-card reveal">
           <div class="rental-card__img">
             <div class="rental-card__placeholder rental-card__placeholder--audio">🎙️</div>
@@ -1288,6 +1621,41 @@
               <button class="rental-card__btn">Book Now</button>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       FOUNDER'S VISION
+       ════════════════════════════════════════ -->
+  <section class="founder reveal">
+    <div class="container">
+      <div class="founder__grid">
+        <div class="founder__portrait">
+          <div class="founder__portrait-placeholder">CHRIS ALVAREZ<br>B&W PORTRAIT</div>
+        </div>
+        <div>
+          <p class="section-header__overtitle">Founder's Vision</p>
+          <h2 class="founder__name">Chris Alvarez</h2>
+          <p class="founder__role">Founder & Creative Director</p>
+          <p class="founder__quote">"We don't just film events. We fund missions."</p>
+          <p class="founder__bio">Chris leads an innovative NYC crew that has worked with Columbia, NYU, Meta, and the United Nations. From a single camera to a 12-camera live broadcast, Transcendent Enterprise has been the backbone of high-stakes productions since 2004.</p>
+          <div class="founder__stats">
+            <div>
+              <div class="founder__stat-number">18+</div>
+              <div class="founder__stat-label">Years Experience</div>
+            </div>
+            <div>
+              <div class="founder__stat-number">6,500+</div>
+              <div class="founder__stat-label">Productions</div>
+            </div>
+            <div>
+              <div class="founder__stat-number">$100M+</div>
+              <div class="founder__stat-label">Raised for Clients</div>
+            </div>
+          </div>
+          <div class="founder__signature">Chris Alvarez</div>
         </div>
       </div>
     </div>
@@ -1344,63 +1712,106 @@
   </footer>
 
   <!-- ════════════════════════════════════════
+       LIVE OVERLAY
+       ════════════════════════════════════════ -->
+  <div class="live-overlay" id="liveOverlay">
+    <button class="live-overlay__close" onclick="toggleLiveOverlay()">&times;</button>
+    <div class="live-overlay__content">
+      <div class="live-overlay__status">
+        <span class="live-dot"></span>
+        <span class="live-text">LIVE BROADCAST</span>
+      </div>
+      <h2 style="font-family:var(--font-heading); font-size:clamp(1.5rem,4vw,2.5rem); letter-spacing:5px; margin-bottom:24px;">ON-AIR NOW</h2>
+      <div class="live-overlay__viewport">
+        <div style="text-align:center; padding:40px;">
+          <div class="live-overlay__lock">🔒</div>
+          <div class="live-overlay__private-title">PRIVATE EXECUTIVE BROADCAST</div>
+          <p class="live-overlay__private-desc">We are currently managing a high-security executive stream for a Fortune 500 client. Our 12-camera, zero-lag infrastructure handles 500K+ concurrent viewers.</p>
+          <p style="margin-top:20px; font-size:0.8rem; color:var(--blue);">Next public broadcast: Carnegie Hall Annual Gala — March 15</p>
+        </div>
+      </div>
+      <a href="#services" class="btn btn--primary" onclick="toggleLiveOverlay()">Secure Your Live Event Date</a>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
        JAVASCRIPT
        ════════════════════════════════════════ -->
   <script>
     // ─── Qualification Flow State ───
     const qualState = {
       objective: null,
+      brandStrategy: null,
       timeline: null,
       budget: null,
     };
 
     const ctaMap = {
-      'Raise Capital': { text: 'Book Capital Strategy Session', icon: '💰' },
-      'Recruit Talent': { text: 'Book Talent Campaign Call', icon: '🎯' },
-      'Scale Brand': { text: 'Book Brand Strategy Session', icon: '📈' },
-      'Live Stream': { text: 'Check Event Availability', icon: '🔴' },
+      'Raise Capital': { text: 'Book Capital Strategy Session' },
+      'Recruit Talent': { text: 'Book Talent Campaign Call' },
+      'Scale Brand': { text: 'Book Brand Strategy Session' },
+      'Live Stream': { text: 'Check Event Availability' },
+    };
+
+    const strategyMap = {
+      'Innovation Launch': 'Strategy: Architecting a Global Launch for Market Dominance',
+      'Visionary Series': 'Strategy: High-Trust Documentary Authority',
+      'Multi-Platform Dominance': 'Strategy: Cinematic Social Ecosystem',
+      'Global Enterprise Suite': 'Strategy: Unified International Narrative',
     };
 
     function selectOption(step, el) {
       const value = el.dataset.value;
-
-      // Remove selected state from siblings
       el.parentElement.querySelectorAll('.qual__card').forEach(c => c.classList.remove('selected'));
       el.classList.add('selected');
 
-      // Store value
-      if (step === 1) qualState.objective = value;
+      if (step === 1) {
+        qualState.objective = value;
+        qualState.brandStrategy = null;
+        // Show/hide the 1.5 progress dot
+        const dot15 = document.querySelector('.qual__progress-dot[data-step="1.5"]');
+        if (value === 'Scale Brand') {
+          dot15.classList.remove('hidden');
+          setTimeout(() => advanceStep(1.5), 300);
+        } else {
+          dot15.classList.add('hidden');
+          setTimeout(() => advanceStep(2), 300);
+        }
+        return;
+      }
       if (step === 2) qualState.timeline = value;
       if (step === 3) qualState.budget = value;
 
-      // Brief delay for visual feedback, then advance
       setTimeout(() => advanceStep(step + 1), 300);
     }
 
+    function selectBrandStrategy(el) {
+      const value = el.dataset.value;
+      el.parentElement.querySelectorAll('.qual__card').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      qualState.brandStrategy = value;
+      setTimeout(() => advanceStep(2), 300);
+    }
+
     function advanceStep(nextStep) {
-      // Hide all steps
       document.querySelectorAll('.qual__step').forEach(s => {
         s.classList.remove('active');
         s.style.display = 'none';
       });
 
-      // Show next step
       const next = document.querySelector(`.qual__step[data-step="${nextStep}"]`);
       if (next) {
         next.style.display = 'block';
         next.classList.add('active');
-
-        // Animate with GSAP
         gsap.fromTo(next, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
       }
 
       // Update progress dots
-      document.querySelectorAll('.qual__progress-dot').forEach(dot => {
-        const dotStep = parseInt(dot.dataset.step);
+      document.querySelectorAll('.qual__progress-dot:not(.hidden)').forEach(dot => {
+        const dotStep = parseFloat(dot.dataset.step);
         dot.classList.toggle('filled', dotStep <= nextStep);
       });
 
-      // If step 4, populate summary
       if (nextStep === 4) populateSummary();
     }
 
@@ -1411,12 +1822,64 @@
     function populateSummary() {
       document.getElementById('sumObjective').textContent = qualState.objective || '—';
       document.getElementById('sumTimeline').textContent = qualState.timeline || '—';
-      document.getElementById('sumBudget').textContent = qualState.budget || '—';
 
-      // Dynamic CTA based on objective
-      const cta = ctaMap[qualState.objective] || { text: 'Book a Strategy Session', icon: '🚀' };
+      // Hormozi: "Allocation for [Outcome]" instead of raw budget
+      const outcomeLabels = {
+        'Raise Capital': 'Fundraising Success Strategy',
+        'Recruit Talent': 'Talent Acquisition Campaign',
+        'Scale Brand': 'Brand Dominance Campaign',
+        'Live Stream': 'Live Production Infrastructure',
+      };
+      const outcomeLabel = outcomeLabels[qualState.objective] || 'Your Project';
+      document.getElementById('sumBudget').textContent = qualState.budget
+        ? `${qualState.budget} — ${outcomeLabel}`
+        : '—';
+
+      // Dynamic CTA
+      const cta = ctaMap[qualState.objective] || { text: 'Book a Strategy Session' };
       document.getElementById('sumCta').textContent = cta.text;
+
+      // Strategy line for Scale Brand
+      const strategyEl = document.getElementById('sumStrategy');
+      if (qualState.brandStrategy && strategyMap[qualState.brandStrategy]) {
+        strategyEl.textContent = strategyMap[qualState.brandStrategy];
+        strategyEl.classList.add('visible');
+      } else {
+        strategyEl.classList.remove('visible');
+      }
+
+      // Live Stream gets live specs button
+      const liveBtn = document.getElementById('sumLiveBtn');
+      if (qualState.objective === 'Live Stream') {
+        liveBtn.classList.add('visible');
+      } else {
+        liveBtn.classList.remove('visible');
+      }
     }
+
+    // ─── Live Overlay ───
+    function toggleLiveOverlay() {
+      const overlay = document.getElementById('liveOverlay');
+      if (overlay.classList.contains('open')) {
+        gsap.to(overlay, {
+          opacity: 0, duration: 0.3, onComplete: () => {
+            overlay.classList.remove('open');
+            gsap.set(overlay, { opacity: 1 });
+          }
+        });
+      } else {
+        overlay.classList.add('open');
+        gsap.fromTo(overlay, { opacity: 0 }, { opacity: 1, duration: 0.4 });
+      }
+    }
+
+    // Close overlay on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const overlay = document.getElementById('liveOverlay');
+        if (overlay.classList.contains('open')) toggleLiveOverlay();
+      }
+    });
 
     // ─── Navigation ───
     const nav = document.getElementById('nav');
@@ -1432,7 +1895,6 @@
       navLinks.classList.toggle('open');
     });
 
-    // Close mobile nav on link click
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         navToggle.classList.remove('active');
@@ -1440,11 +1902,46 @@
       });
     });
 
+    // ─── Custom Magnetic Cursor ───
+    const cursor = document.getElementById('custom-cursor');
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+
+    if (!isTouchDevice && cursor) {
+      document.addEventListener('mousemove', (e) => {
+        gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.15, ease: 'power2.out' });
+      });
+
+      // Expand cursor on work cards
+      document.querySelectorAll('.work__card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          cursor.classList.add('expanded');
+        });
+        card.addEventListener('mouseleave', () => {
+          cursor.classList.remove('expanded');
+        });
+      });
+
+      // Subtle grow on interactive elements
+      document.querySelectorAll('a, button, .qual__card, .live-indicator').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          if (!cursor.classList.contains('expanded')) {
+            gsap.to(cursor, { scale: 2, duration: 0.2 });
+          }
+        });
+        el.addEventListener('mouseleave', () => {
+          if (!cursor.classList.contains('expanded')) {
+            gsap.to(cursor, { scale: 1, duration: 0.2 });
+          }
+        });
+      });
+    }
+
     // ─── GSAP Animations ───
     gsap.registerPlugin(ScrollTrigger);
 
     // Hero entrance
     const heroTl = gsap.timeline({ delay: 0.3 });
+    gsap.set(['.hero__overtitle', '.hero__title', '.hero__tagline', '.hero__cta-group'], { y: 30 });
     heroTl
       .to('.hero__overtitle', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' })
       .to('.hero__title', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, '-=0.5')
@@ -1452,84 +1949,61 @@
       .to('.hero__cta-group', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.5')
       .to('.hero__scroll', { opacity: 0.6, duration: 1 }, '-=0.3');
 
-    // Set initial hero states
-    gsap.set(['.hero__overtitle', '.hero__title', '.hero__tagline', '.hero__cta-group'], { y: 30 });
-
-    // Scroll reveals for .reveal elements
+    // Scroll reveals
     gsap.utils.toArray('.reveal').forEach(el => {
       gsap.to(el, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 85%',
-          once: true,
-        },
+        opacity: 1, y: 0, duration: 0.8, ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 85%', once: true },
       });
     });
 
-    // Coffee & TV signature — Work cards scale into viewport
+    // Coffee & TV signature — work cards scale into viewport
     gsap.utils.toArray('.work__card').forEach(card => {
-      gsap.fromTo(card,
-        { scale: 0.92 },
-        {
-          scale: 1,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 90%',
-            end: 'top 30%',
-            scrub: 1,
-          },
-        }
-      );
+      gsap.fromTo(card, { scale: 0.9 }, {
+        scale: 1, ease: 'none',
+        scrollTrigger: { trigger: card, start: 'top 90%', end: 'top 30%', scrub: 1 },
+      });
     });
 
-    // Rental cards stagger entrance
+    // Mobile: auto-reveal work card overlays on scroll (no hover needed)
+    if (isTouchDevice) {
+      gsap.utils.toArray('.work__card-overlay').forEach(overlay => {
+        gsap.to(overlay, {
+          opacity: 1, duration: 0.5,
+          scrollTrigger: { trigger: overlay.parentElement, start: 'top 60%', end: 'top 30%', scrub: 1 },
+        });
+      });
+    }
+
+    // Rental cards stagger
     ScrollTrigger.batch('.rental-card', {
       onEnter: batch => {
-        gsap.to(batch, {
-          opacity: 1,
-          y: 0,
-          stagger: 0.1,
-          duration: 0.6,
-          ease: 'power2.out',
-        });
+        gsap.to(batch, { opacity: 1, y: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out' });
       },
       start: 'top 85%',
       once: true,
     });
 
-    // Client logos subtle fade
+    // Client logos stagger
     gsap.utils.toArray('.clients__logo').forEach((logo, i) => {
-      gsap.fromTo(logo,
-        { opacity: 0, y: 15 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          delay: i * 0.08,
-          scrollTrigger: {
-            trigger: '.clients__grid',
-            start: 'top 85%',
-            once: true,
-          },
-        }
-      );
+      gsap.fromTo(logo, { opacity: 0, y: 15 }, {
+        opacity: 1, y: 0, duration: 0.5, delay: i * 0.08,
+        scrollTrigger: { trigger: '.clients__grid', start: 'top 85%', once: true },
+      });
     });
 
     // Parallax on hero content
     gsap.to('.hero__content', {
-      y: 100,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '.hero',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: 1,
-      },
+      y: 100, ease: 'none',
+      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 },
+    });
+
+    // Founder stats counter animation
+    gsap.utils.toArray('.founder__stat-number').forEach(stat => {
+      gsap.from(stat, {
+        opacity: 0, y: 20, duration: 0.6,
+        scrollTrigger: { trigger: stat, start: 'top 85%', once: true },
+      });
     });
   </script>
 
