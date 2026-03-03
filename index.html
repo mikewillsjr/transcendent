@@ -548,9 +548,47 @@
     /* Option cards */
     .qual__options {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 16px;
     }
+
+    .qual__options--4col {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 768px) {
+      .qual__options { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 480px) {
+      .qual__options, .qual__options--4col { grid-template-columns: 1fr; }
+    }
+
+    /* Live tag on card */
+    .qual__card-live-tag {
+      display: none;
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-top: 8px;
+      position: relative;
+    }
+
+    .qual__card-live-tag::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--red);
+      border-radius: 50%;
+      margin-right: 6px;
+      vertical-align: middle;
+      animation: livePulse 1.5s ease-in-out infinite;
+    }
+
+    .qual__card-live-tag.visible { display: block; }
 
     .qual__card {
       background: var(--dark-card);
@@ -1215,6 +1253,84 @@
     }
 
     /* ═══════════════════════════════════════════
+       SCARCITY BANNER
+       ═══════════════════════════════════════════ */
+    .scarcity-banner {
+      background: var(--blue);
+      color: var(--white);
+      padding: 12px 0;
+      text-align: center;
+      position: relative;
+      z-index: 101;
+      transform: translateY(-100%);
+    }
+
+    .scarcity-banner .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .scarcity-badge {
+      display: inline-block;
+      background: var(--white);
+      color: var(--blue);
+      padding: 3px 12px;
+      border-radius: 4px;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .scarcity-banner__text {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .scarcity-banner__cta {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-decoration: underline;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 640px) {
+      .scarcity-banner .container { gap: 8px; }
+      .scarcity-banner__text { font-size: 0.7rem; }
+    }
+
+    /* Priority booking pulse on high-budget selections */
+    .priority-pulse {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      justify-content: center;
+    }
+
+    .priority-pulse.visible { display: flex; }
+
+    .priority-pulse__dot {
+      width: 8px;
+      height: 8px;
+      background: var(--red);
+      border-radius: 50%;
+      animation: livePulse 1.5s ease-in-out infinite;
+    }
+
+    .priority-pulse__text {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 0.5px;
+    }
+
+    /* ═══════════════════════════════════════════
        UTILITY
        ═══════════════════════════════════════════ */
     .reveal {
@@ -1232,6 +1348,17 @@
 
   <!-- Custom Cursor (hidden on touch) -->
   <div id="custom-cursor"><span class="cursor-text">VIEW</span></div>
+
+  <!-- ════════════════════════════════════════
+       SCARCITY BANNER
+       ════════════════════════════════════════ -->
+  <div class="scarcity-banner" id="scarcityBanner">
+    <div class="container">
+      <span class="scarcity-badge">Limited Capacity</span>
+      <span class="scarcity-banner__text">Now booking Q3/Q4 global summits. Only 4 dates remaining for premium broadcast teams.</span>
+      <a href="#services" class="scarcity-banner__cta">Secure Your Date &rarr;</a>
+    </div>
+  </div>
 
   <!-- ════════════════════════════════════════
        NAVIGATION
@@ -1345,6 +1472,19 @@
               <div class="qual__card-title">Live Stream</div>
               <div class="qual__card-stat">500K+ Live Viewers</div>
               <div class="qual__card-desc">Multi-camera live production & virtual events</div>
+              <div class="qual__card-live-tag visible" id="liveStreamTag">LIVE PRODUCTION IN PROGRESS</div>
+            </div>
+            <div class="qual__card" data-value="Podcast & Thought Leadership" onclick="selectOption(1, this)">
+              <div class="qual__card-icon">🎙️</div>
+              <div class="qual__card-title">Podcast</div>
+              <div class="qual__card-stat">1 Session → 20+ Cinematic Assets</div>
+              <div class="qual__card-desc">Broadcast-quality visual podcasts for LinkedIn & YouTube</div>
+            </div>
+            <div class="qual__card" data-value="Conferences & Summits" onclick="selectOption(1, this)">
+              <div class="qual__card-icon">🏛️</div>
+              <div class="qual__card-title">Conferences</div>
+              <div class="qual__card-stat">Zero-Failure Multi-Cam Coverage</div>
+              <div class="qual__card-desc">High-stakes summit documentation for global organizations</div>
             </div>
           </div>
         </div>
@@ -1461,6 +1601,10 @@
             <div class="qual__summary-strategy" id="sumStrategy"></div>
             <a href="#contact" class="btn btn--primary" id="sumCta" style="margin-top:24px">Book a Strategy Session</a>
             <button class="btn btn--ghost qual__summary-live-btn" id="sumLiveBtn" onclick="toggleLiveOverlay()" style="margin-top:12px">View Live Production Specs</button>
+            <div class="priority-pulse" id="priorityPulse">
+              <span class="priority-pulse__dot"></span>
+              <span class="priority-pulse__text">Priority Booking: 2 Strategy Calls Available This Week</span>
+            </div>
             <p style="margin-top:16px; font-size:0.8rem; color:var(--white-muted);">
               We'll respond within 2 business hours
             </p>
@@ -1751,6 +1895,8 @@
       'Recruit Talent': { text: 'Book Talent Campaign Call' },
       'Scale Brand': { text: 'Book Brand Strategy Session' },
       'Live Stream': { text: 'Check Event Availability' },
+      'Podcast & Thought Leadership': { text: 'Book Podcast Studio Session' },
+      'Conferences & Summits': { text: 'Reserve Event Coverage Team' },
     };
 
     const strategyMap = {
@@ -1829,6 +1975,8 @@
         'Recruit Talent': 'Talent Acquisition Campaign',
         'Scale Brand': 'Brand Dominance Campaign',
         'Live Stream': 'Live Production Infrastructure',
+        'Podcast & Thought Leadership': 'Authority Multiplier Content',
+        'Conferences & Summits': 'Global Event Documentation',
       };
       const outcomeLabel = outcomeLabels[qualState.objective] || 'Your Project';
       document.getElementById('sumBudget').textContent = qualState.budget
@@ -1854,6 +2002,15 @@
         liveBtn.classList.add('visible');
       } else {
         liveBtn.classList.remove('visible');
+      }
+
+      // Priority pulse on $50K+ selections
+      const priorityPulse = document.getElementById('priorityPulse');
+      const highBudget = qualState.budget && (qualState.budget.includes('50K') || qualState.budget.includes('150K'));
+      if (highBudget) {
+        priorityPulse.classList.add('visible');
+      } else {
+        priorityPulse.classList.remove('visible');
       }
     }
 
@@ -2004,6 +2161,24 @@
         opacity: 0, y: 20, duration: 0.6,
         scrollTrigger: { trigger: stat, start: 'top 85%', once: true },
       });
+    });
+
+    // ─── Scarcity Banner ───
+    // Drop down after 2s delay, then hide on scroll
+    const banner = document.getElementById('scarcityBanner');
+    gsap.to(banner, {
+      y: 0, duration: 0.6, ease: 'power2.out', delay: 2,
+    });
+
+    ScrollTrigger.create({
+      start: 'top -80',
+      onUpdate: (self) => {
+        if (self.direction === 1 && self.scroll() > 100) {
+          gsap.to(banner, { y: '-100%', duration: 0.4, ease: 'power2.in' });
+        } else if (self.scroll() < 50) {
+          gsap.to(banner, { y: 0, duration: 0.4, ease: 'power2.out' });
+        }
+      },
     });
   </script>
 
