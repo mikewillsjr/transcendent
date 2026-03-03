@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transcendent Enterprise — NYC Video Production & Live Streaming</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    /* ═══════════════════════════════════════════
+       CSS CUSTOM PROPERTIES
+       ═══════════════════════════════════════════ */
+    :root {
+      --black: #0a0a0a;
+      --dark: #121212;
+      --dark-secondary: #1a1a1a;
+      --dark-card: #161616;
+      --white: #f5f5f5;
+      --white-muted: #a0a0a0;
+      --blue: #1f6db7;
+      --blue-glow: rgba(31, 109, 183, 0.3);
+      --blue-hover: #2580d4;
+      --font-heading: 'Bebas Neue', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    /* ═══════════════════════════════════════════
+       RESET & BASE
+       ═══════════════════════════════════════════ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ═══════════════════════════════════════════
+       NAVIGATION
+       ═══════════════════════════════════════════ */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 20px 0;
+      transition: background 0.4s, padding 0.4s, backdrop-filter 0.4s;
+    }
+
+    .nav.scrolled {
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 12px 0;
+    }
+
+    .nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav__logo {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      letter-spacing: 4px;
+      color: var(--white);
+    }
+
+    .nav__links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav__links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--white-muted);
+      transition: color 0.3s;
+    }
+
+    .nav__links a:hover { color: var(--white); }
+
+    .nav__cta {
+      background: var(--blue);
+      color: var(--white) !important;
+      padding: 10px 24px;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .nav__cta:hover {
+      background: var(--blue-hover);
+      transform: translateY(-1px);
+    }
+
+    /* Mobile nav toggle */
+    .nav__toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav__toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .nav__toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .nav__toggle.active span:nth-child(2) { opacity: 0; }
+    .nav__toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    @media (max-width: 768px) {
+      .nav__toggle { display: flex; }
+      .nav__links {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(10, 10, 10, 0.97);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s;
+      }
+      .nav__links.open { opacity: 1; pointer-events: all; }
+      .nav__links a { font-size: 1.2rem; }
+    }
+
+    /* ═══════════════════════════════════════════
+       SECTION: HERO
+       ═══════════════════════════════════════════ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 50%, rgba(31, 109, 183, 0.08) 0%, transparent 60%),
+        linear-gradient(180deg, var(--black) 0%, var(--dark) 100%);
+    }
+
+    /* Animated film grain overlay */
+    .hero__grain {
+      position: absolute;
+      inset: 0;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 128px;
+      pointer-events: none;
+    }
+
+    .hero__content {
+      position: relative;
+      text-align: center;
+      padding: 0 24px;
+      max-width: 900px;
+    }
+
+    .hero__overtitle {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 24px;
+      opacity: 0;
+    }
+
+    .hero__title {
+      font-family: var(--font-heading);
+      font-size: clamp(4rem, 12vw, 9rem);
+      letter-spacing: 14px;
+      line-height: 0.95;
+      color: var(--white);
+      margin-bottom: 24px;
+      opacity: 0;
+    }
+
+    .hero__tagline {
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      font-weight: 300;
+      color: var(--white-muted);
+      max-width: 600px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+      opacity: 0;
+    }
+
+    .hero__cta-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 4px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: none;
+    }
+
+    .btn--primary {
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .btn--primary:hover {
+      background: var(--blue-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px var(--blue-glow);
+    }
+
+    .btn--ghost {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(245, 245, 245, 0.2);
+    }
+
+    .btn--ghost:hover {
+      border-color: var(--white);
+      background: rgba(245, 245, 245, 0.05);
+    }
+
+    /* Scroll indicator */
+    .hero__scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+    }
+
+    .hero__scroll-text {
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--white-muted);
+    }
+
+    .hero__scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--blue), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
+      50% { opacity: 1; transform: scaleY(1); }
+    }
+
+    /* ═══════════════════════════════════════════
+       SECTION: CLIENT LOGO BAR
+       ═══════════════════════════════════════════ */
+    .clients {
+      padding: 80px 0;
+      border-top: 1px solid rgba(245, 245, 245, 0.05);
+      border-bottom: 1px solid rgba(245, 245, 245, 0.05);
+      background: var(--black);
+    }
+
+    .clients__label {
+      text-align: center;
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--white-muted);
+      margin-bottom: 48px;
+    }
+
+    .clients__grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 48px 64px;
+    }
+
+    .clients__logo {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      letter-spacing: 3px;
+      color: rgba(245, 245, 245, 0.25);
+      transition: color 0.4s;
+      white-space: nowrap;
+    }
+
+    .clients__logo:hover { color: rgba(245, 245, 245, 0.6); }
+
+    @media (max-width: 640px) {
+      .clients__grid { gap: 32px 40px; }
+      .clients__logo { font-size: 1.1rem; }
+    }
+
+    /* ═══════════════════════════════════════════
+       SECTION HEADERS (shared)
+       ═══════════════════════════════════════════ */
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .section-header__overtitle {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 16px;
+    }
+
+    .section-header__title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      letter-spacing: 4px;
+      line-height: 1;
+    }
+
+    .section-header__subtitle {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--white-muted);
+      max-width: 550px;
+      margin: 20px auto 0;
+      line-height: 1.7;
+    }
+
+    /* ═══════════════════════════════════════════
+       SECTION: SERVICES — QUALIFICATION FLOW
+       ═══════════════════════════════════════════ */
+    .services {
+      padding: 120px 0;
+      background: var(--dark);
+    }
+
+    .qual {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      min-height: 400px;
+    }
+
+    .qual__step {
+      display: none;
+      animation: fadeSlideUp 0.5s ease forwards;
+    }
+
+    .qual__step.active { display: block; }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .qual__question {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      letter-spacing: 3px;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .qual__step-label {
+      text-align: center;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--white-muted);
+      margin-bottom: 40px;
+    }
+
+    /* Progress bar */
+    .qual__progress {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 48px;
+      justify-content: center;
+    }
+
+    .qual__progress-dot {
+      width: 48px;
+      height: 3px;
+      border-radius: 2px;
+      background: rgba(245, 245, 245, 0.1);
+      transition: background 0.4s;
+    }
+
+    .qual__progress-dot.filled { background: var(--blue); }
+
+    /* Option cards */
+    .qual__options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .qual__card {
+      background: var(--dark-card);
+      border: 1px solid rgba(245, 245, 245, 0.06);
+      border-radius: 8px;
+      padding: 28px 24px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .qual__card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--blue-glow), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .qual__card:hover {
+      border-color: var(--blue);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 40px rgba(31, 109, 183, 0.1);
+    }
+
+    .qual__card:hover::before { opacity: 1; }
+
+    .qual__card.selected {
+      border-color: var(--blue);
+      background: rgba(31, 109, 183, 0.08);
+    }
+
+    .qual__card-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .qual__card-title {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+      position: relative;
+    }
+
+    .qual__card-stat {
+      font-size: 0.75rem;
+      color: var(--blue);
+      font-weight: 600;
+      letter-spacing: 1px;
+      position: relative;
+    }
+
+    .qual__card-desc {
+      font-size: 0.85rem;
+      color: var(--white-muted);
+      position: relative;
+      margin-top: 4px;
+    }
+
+    /* Step 4: Summary */
+    .qual__summary {
+      background: var(--dark-card);
+      border: 1px solid rgba(245, 245, 245, 0.08);
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .qual__summary-list {
+      list-style: none;
+      margin: 24px 0 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .qual__summary-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(245, 245, 245, 0.06);
+      font-size: 0.95rem;
+    }
+
+    .qual__summary-label { color: var(--white-muted); }
+    .qual__summary-value { font-weight: 600; color: var(--white); }
+
+    .qual__back {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: var(--white-muted);
+      cursor: pointer;
+      transition: color 0.3s;
+      background: none;
+      border: none;
+      font-family: var(--font-body);
+    }
+
+    .qual__back:hover { color: var(--white); }
+
+    /* ═══════════════════════════════════════════
+       SECTION: WORK SHOWCASE
+       ═══════════════════════════════════════════ */
+    .work {
+      padding: 120px 0;
+      background: var(--black);
+    }
+
+    .work__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+    }
+
+    .work__card {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 16/10;
+      background: var(--dark-card);
+      cursor: pointer;
+      group: true;
+    }
+
+    .work__card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease, filter 0.6s;
+    }
+
+    /* Placeholder gradient for demo */
+    .work__card-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .work__card-placeholder--1 {
+      background: linear-gradient(135deg, #0d1b2a 0%, #1b3a5c 50%, #1f6db7 100%);
+    }
+
+    .work__card-placeholder--2 {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    }
+
+    .work__card-placeholder--3 {
+      background: linear-gradient(135deg, #0c0c1d 0%, #1a1a3e 50%, #2d2d6e 100%);
+    }
+
+    .work__card-placeholder-text {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      letter-spacing: 4px;
+      color: rgba(245, 245, 245, 0.15);
+    }
+
+    .work__card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(10, 10, 10, 0.9) 0%, transparent 50%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 32px;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .work__card:hover .work__card-overlay { opacity: 1; }
+    .work__card:hover .work__card-img { transform: scale(1.05); filter: brightness(0.7); }
+
+    .work__card-category {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+
+    .work__card-name {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+    }
+
+    .work__card-client {
+      font-size: 0.85rem;
+      color: var(--white-muted);
+      margin-top: 4px;
+    }
+
+    /* Scale on scroll - Coffee & TV signature */
+    .work__card {
+      will-change: transform;
+    }
+
+    @media (max-width: 640px) {
+      .work__grid { grid-template-columns: 1fr; }
+    }
+
+    /* ═══════════════════════════════════════════
+       SECTION: EQUIPMENT RENTALS
+       ═══════════════════════════════════════════ */
+    .rentals {
+      padding: 120px 0;
+      background: var(--dark);
+    }
+
+    .rentals__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .rental-card {
+      background: var(--dark-card);
+      border: 1px solid rgba(245, 245, 245, 0.06);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .rental-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(245, 245, 245, 0.12);
+    }
+
+    .rental-card__img {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+    }
+
+    .rental-card__placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+
+    .rental-card__placeholder--cam { background: linear-gradient(135deg, #141e30, #243b55); }
+    .rental-card__placeholder--lens { background: linear-gradient(135deg, #1a1a2e, #1f4068); }
+    .rental-card__placeholder--light { background: linear-gradient(135deg, #2d1b3d, #1b1464); }
+    .rental-card__placeholder--studio { background: linear-gradient(135deg, #0d1117, #1a2332); }
+    .rental-card__placeholder--drone { background: linear-gradient(135deg, #1a1a1a, #2d2d2d); }
+    .rental-card__placeholder--audio { background: linear-gradient(135deg, #1a0a0a, #2d1f1f); }
+
+    .rental-card__badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .rental-card__badge--popular {
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .rental-card__badge--value {
+      background: #2ecc71;
+      color: #000;
+    }
+
+    .rental-card__badge--limited {
+      background: #e74c3c;
+      color: var(--white);
+    }
+
+    .rental-card__body {
+      padding: 20px;
+    }
+
+    .rental-card__name {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+    }
+
+    .rental-card__desc {
+      font-size: 0.8rem;
+      color: var(--white-muted);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .rental-card__footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .rental-card__price {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+    }
+
+    .rental-card__price span {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      color: var(--white-muted);
+      font-weight: 400;
+    }
+
+    .rental-card__btn {
+      padding: 8px 20px;
+      background: transparent;
+      border: 1px solid var(--blue);
+      color: var(--blue);
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: var(--font-body);
+    }
+
+    .rental-card__btn:hover {
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .rental-card__tag {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: #e67e22;
+    }
+
+    @media (max-width: 640px) {
+      .rentals__grid { grid-template-columns: 1fr; }
+    }
+
+    /* ═══════════════════════════════════════════
+       SECTION: FOOTER
+       ═══════════════════════════════════════════ */
+    .footer {
+      padding: 80px 0 40px;
+      background: var(--black);
+      border-top: 1px solid rgba(245, 245, 245, 0.05);
+    }
+
+    .footer__top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 64px;
+    }
+
+    .footer__brand-name {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      letter-spacing: 4px;
+      margin-bottom: 16px;
+    }
+
+    .footer__brand-desc {
+      font-size: 0.85rem;
+      color: var(--white-muted);
+      line-height: 1.7;
+      max-width: 300px;
+    }
+
+    .footer__col-title {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+      color: var(--white);
+    }
+
+    .footer__col-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer__col-links a {
+      font-size: 0.85rem;
+      color: var(--white-muted);
+      transition: color 0.3s;
+    }
+
+    .footer__col-links a:hover { color: var(--white); }
+
+    .footer__bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 32px;
+      border-top: 1px solid rgba(245, 245, 245, 0.05);
+    }
+
+    .footer__copy {
+      font-size: 0.8rem;
+      color: var(--white-muted);
+    }
+
+    .footer__socials {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer__social {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(245, 245, 245, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--white-muted);
+      transition: all 0.3s;
+    }
+
+    .footer__social:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: rgba(31, 109, 183, 0.1);
+    }
+
+    @media (max-width: 768px) {
+      .footer__top {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .footer__top { grid-template-columns: 1fr; }
+      .footer__bottom { flex-direction: column; gap: 16px; text-align: center; }
+    }
+
+    /* ═══════════════════════════════════════════
+       UTILITY: REVEAL ANIMATIONS
+       ═══════════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    /* ═══════════════════════════════════════════
+       SELECTION STYLE
+       ═══════════════════════════════════════════ */
+    ::selection {
+      background: var(--blue);
+      color: var(--white);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════
+       NAVIGATION
+       ════════════════════════════════════════ -->
+  <nav class="nav" id="nav">
+    <div class="container">
+      <a href="#" class="nav__logo">TRANSCENDENT</a>
+      <button class="nav__toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#rentals">Rentals</a></li>
+        <li><a href="#contact" class="nav__cta">Get Started</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════════════
+       HERO
+       ════════════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero__bg"></div>
+    <div class="hero__grain"></div>
+    <div class="hero__content">
+      <p class="hero__overtitle">NYC's Premier Production Company</p>
+      <h1 class="hero__title">TRANSCENDENT</h1>
+      <p class="hero__tagline">We don't just film events. We fund missions.</p>
+      <div class="hero__cta-group">
+        <a href="#services" class="btn btn--primary">Start Your Project</a>
+        <a href="#work" class="btn btn--ghost">View Our Work</a>
+      </div>
+    </div>
+    <div class="hero__scroll">
+      <span class="hero__scroll-text">Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       CLIENT LOGOS
+       ════════════════════════════════════════ -->
+  <section class="clients">
+    <div class="container">
+      <p class="clients__label reveal">Trusted by industry leaders</p>
+      <div class="clients__grid reveal">
+        <span class="clients__logo">COLUMBIA</span>
+        <span class="clients__logo">NYU</span>
+        <span class="clients__logo">MOUNT SINAI</span>
+        <span class="clients__logo">FACEBOOK</span>
+        <span class="clients__logo">UNITED NATIONS</span>
+        <span class="clients__logo">AMAZON</span>
+        <span class="clients__logo">CARNEGIE HALL</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       SERVICES — QUALIFICATION FLOW
+       ════════════════════════════════════════ -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-header__overtitle">Services</p>
+        <h2 class="section-header__title">Let's Build Your Vision</h2>
+        <p class="section-header__subtitle">Tell us about your project and we'll craft a custom approach.</p>
+      </div>
+
+      <div class="qual" id="qual">
+        <!-- Progress -->
+        <div class="qual__progress">
+          <div class="qual__progress-dot filled" data-step="1"></div>
+          <div class="qual__progress-dot" data-step="2"></div>
+          <div class="qual__progress-dot" data-step="3"></div>
+          <div class="qual__progress-dot" data-step="4"></div>
+        </div>
+
+        <!-- Step 1: Objective -->
+        <div class="qual__step active" data-step="1">
+          <h3 class="qual__question">What Is Your Primary Objective?</h3>
+          <p class="qual__step-label">Step 1 of 4</p>
+          <div class="qual__options">
+            <div class="qual__card" data-value="Raise Capital" onclick="selectOption(1, this)">
+              <div class="qual__card-icon">💰</div>
+              <div class="qual__card-title">Raise Capital</div>
+              <div class="qual__card-stat">$100M+ Raised for Clients</div>
+              <div class="qual__card-desc">Non-profit galas, fundraisers & investor events</div>
+            </div>
+            <div class="qual__card" data-value="Recruit Talent" onclick="selectOption(1, this)">
+              <div class="qual__card-icon">🎯</div>
+              <div class="qual__card-title">Recruit Talent</div>
+              <div class="qual__card-stat">Fortune 500 Campaigns</div>
+              <div class="qual__card-desc">Employer branding, culture videos & recruiting events</div>
+            </div>
+            <div class="qual__card" data-value="Scale Brand" onclick="selectOption(1, this)">
+              <div class="qual__card-icon">📈</div>
+              <div class="qual__card-title">Scale Brand</div>
+              <div class="qual__card-stat">200+ Brand Campaigns</div>
+              <div class="qual__card-desc">Commercial production, social content & brand films</div>
+            </div>
+            <div class="qual__card" data-value="Live Stream" onclick="selectOption(1, this)">
+              <div class="qual__card-icon">🔴</div>
+              <div class="qual__card-title">Live Stream</div>
+              <div class="qual__card-stat">500K+ Live Viewers</div>
+              <div class="qual__card-desc">Multi-camera live production & virtual events</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Timeline -->
+        <div class="qual__step" data-step="2">
+          <h3 class="qual__question">What's Your Timeline?</h3>
+          <p class="qual__step-label">Step 2 of 4</p>
+          <div class="qual__options">
+            <div class="qual__card" data-value="ASAP (1-2 weeks)" onclick="selectOption(2, this)">
+              <div class="qual__card-icon">⚡</div>
+              <div class="qual__card-title">ASAP</div>
+              <div class="qual__card-desc">1-2 weeks out</div>
+            </div>
+            <div class="qual__card" data-value="Soon (1-2 months)" onclick="selectOption(2, this)">
+              <div class="qual__card-icon">📅</div>
+              <div class="qual__card-title">Soon</div>
+              <div class="qual__card-desc">1-2 months out</div>
+            </div>
+            <div class="qual__card" data-value="Planning (3-6 months)" onclick="selectOption(2, this)">
+              <div class="qual__card-icon">🗓️</div>
+              <div class="qual__card-title">Planning Ahead</div>
+              <div class="qual__card-desc">3-6 months out</div>
+            </div>
+            <div class="qual__card" data-value="Exploring" onclick="selectOption(2, this)">
+              <div class="qual__card-icon">🔍</div>
+              <div class="qual__card-title">Just Exploring</div>
+              <div class="qual__card-desc">No date yet</div>
+            </div>
+          </div>
+          <button class="qual__back" onclick="goBack(1)">&larr; Back</button>
+        </div>
+
+        <!-- Step 3: Budget -->
+        <div class="qual__step" data-step="3">
+          <h3 class="qual__question">What's Your Investment Range?</h3>
+          <p class="qual__step-label">Step 3 of 4</p>
+          <div class="qual__options">
+            <div class="qual__card" data-value="$5K - $15K" onclick="selectOption(3, this)">
+              <div class="qual__card-icon">🎬</div>
+              <div class="qual__card-title">$5K – $15K</div>
+              <div class="qual__card-desc">Single-day shoots, event coverage</div>
+            </div>
+            <div class="qual__card" data-value="$15K - $50K" onclick="selectOption(3, this)">
+              <div class="qual__card-icon">🎥</div>
+              <div class="qual__card-title">$15K – $50K</div>
+              <div class="qual__card-desc">Multi-day productions, full post</div>
+            </div>
+            <div class="qual__card" data-value="$50K - $150K" onclick="selectOption(3, this)">
+              <div class="qual__card-icon">🏆</div>
+              <div class="qual__card-title">$50K – $150K</div>
+              <div class="qual__card-desc">Major campaigns, series, galas</div>
+            </div>
+            <div class="qual__card" data-value="$150K+" onclick="selectOption(3, this)">
+              <div class="qual__card-icon">🌟</div>
+              <div class="qual__card-title">$150K+</div>
+              <div class="qual__card-desc">Enterprise-level, multi-event contracts</div>
+            </div>
+          </div>
+          <button class="qual__back" onclick="goBack(2)">&larr; Back</button>
+        </div>
+
+        <!-- Step 4: Summary + CTA -->
+        <div class="qual__step" data-step="4">
+          <div class="qual__summary">
+            <h3 class="qual__question" id="summaryTitle">Your Custom Project Brief</h3>
+            <ul class="qual__summary-list">
+              <li class="qual__summary-item">
+                <span class="qual__summary-label">Objective</span>
+                <span class="qual__summary-value" id="sumObjective">—</span>
+              </li>
+              <li class="qual__summary-item">
+                <span class="qual__summary-label">Timeline</span>
+                <span class="qual__summary-value" id="sumTimeline">—</span>
+              </li>
+              <li class="qual__summary-item">
+                <span class="qual__summary-label">Investment</span>
+                <span class="qual__summary-value" id="sumBudget">—</span>
+              </li>
+            </ul>
+            <a href="#contact" class="btn btn--primary" id="sumCta">Book a Strategy Session</a>
+            <p style="margin-top:16px; font-size:0.8rem; color:var(--white-muted);">
+              We'll respond within 2 business hours
+            </p>
+          </div>
+          <button class="qual__back" onclick="goBack(3)">&larr; Back</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       WORK SHOWCASE
+       ════════════════════════════════════════ -->
+  <section class="work" id="work">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-header__overtitle">Selected Work</p>
+        <h2 class="section-header__title">Stories That Move People</h2>
+        <p class="section-header__subtitle">From galas at Carnegie Hall to global livestreams — every frame tells a story.</p>
+      </div>
+
+      <div class="work__grid">
+        <div class="work__card reveal">
+          <div class="work__card-placeholder work__card-placeholder--1">
+            <span class="work__card-placeholder-text">COLUMBIA GALA 2024</span>
+          </div>
+          <div class="work__card-overlay">
+            <span class="work__card-category">Fundraising Event</span>
+            <span class="work__card-name">Annual Scholarship Gala</span>
+            <span class="work__card-client">Columbia University — $2.3M Raised</span>
+          </div>
+        </div>
+
+        <div class="work__card reveal">
+          <div class="work__card-placeholder work__card-placeholder--2">
+            <span class="work__card-placeholder-text">UN GLOBAL SUMMIT</span>
+          </div>
+          <div class="work__card-overlay">
+            <span class="work__card-category">Live Stream</span>
+            <span class="work__card-name">Global Climate Summit</span>
+            <span class="work__card-client">United Nations — 340K Live Viewers</span>
+          </div>
+        </div>
+
+        <div class="work__card reveal">
+          <div class="work__card-placeholder work__card-placeholder--3">
+            <span class="work__card-placeholder-text">MOUNT SINAI CAMPAIGN</span>
+          </div>
+          <div class="work__card-overlay">
+            <span class="work__card-category">Brand Film</span>
+            <span class="work__card-name">Frontline Heroes</span>
+            <span class="work__card-client">Mount Sinai Health System</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       EQUIPMENT RENTALS
+       ════════════════════════════════════════ -->
+  <section class="rentals" id="rentals">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-header__overtitle">Equipment & Spaces</p>
+        <h2 class="section-header__title">Production-Ready Rentals</h2>
+        <p class="section-header__subtitle">Cinema-grade gear and studio space available for your next project.</p>
+      </div>
+
+      <div class="rentals__grid">
+        <!-- Card 1 -->
+        <div class="rental-card reveal">
+          <div class="rental-card__img">
+            <div class="rental-card__placeholder rental-card__placeholder--cam">🎥</div>
+            <span class="rental-card__badge rental-card__badge--popular">Most Popular</span>
+          </div>
+          <div class="rental-card__body">
+            <div class="rental-card__name">RED V-Raptor XL</div>
+            <div class="rental-card__desc">8K cinema camera with global shutter. Perfect for commercial and narrative shoots.</div>
+            <div class="rental-card__footer">
+              <div class="rental-card__price">$850 <span>/ day</span></div>
+              <button class="rental-card__btn">Book Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="rental-card reveal">
+          <div class="rental-card__img">
+            <div class="rental-card__placeholder rental-card__placeholder--lens">🔭</div>
+            <span class="rental-card__badge rental-card__badge--value">Best Value</span>
+          </div>
+          <div class="rental-card__body">
+            <div class="rental-card__name">Cooke S7/i Prime Set</div>
+            <div class="rental-card__desc">Full-frame cinema primes (25, 32, 50, 75, 100mm). The Cooke Look™ for every focal length.</div>
+            <div class="rental-card__footer">
+              <div class="rental-card__price">$600 <span>/ day</span></div>
+              <button class="rental-card__btn">Book Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="rental-card reveal">
+          <div class="rental-card__img">
+            <div class="rental-card__placeholder rental-card__placeholder--light">💡</div>
+          </div>
+          <div class="rental-card__body">
+            <div class="rental-card__name">ARRI SkyPanel S360-C</div>
+            <div class="rental-card__desc">Premium soft LED panel with full RGBW color control. Industry-standard key light.</div>
+            <div class="rental-card__footer">
+              <div class="rental-card__price">$400 <span>/ day</span></div>
+              <button class="rental-card__btn">Book Now</button>
+            </div>
+            <div class="rental-card__tag">⚡ Low Availability</div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="rental-card reveal">
+          <div class="rental-card__img">
+            <div class="rental-card__placeholder rental-card__placeholder--studio">🏢</div>
+            <span class="rental-card__badge rental-card__badge--popular">Featured</span>
+          </div>
+          <div class="rental-card__body">
+            <div class="rental-card__name">Chelsea Studio A</div>
+            <div class="rental-card__desc">2,400 sq ft white cyc studio in Chelsea. Pre-rigged lighting grid, green room included.</div>
+            <div class="rental-card__footer">
+              <div class="rental-card__price">$1,800 <span>/ day</span></div>
+              <button class="rental-card__btn">Book Now</button>
+            </div>
+            <div class="rental-card__tag">📍 NYC Local Pick-up Only</div>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="rental-card reveal">
+          <div class="rental-card__img">
+            <div class="rental-card__placeholder rental-card__placeholder--drone">🚁</div>
+            <span class="rental-card__badge rental-card__badge--limited">Limited</span>
+          </div>
+          <div class="rental-card__body">
+            <div class="rental-card__name">DJI Inspire 3</div>
+            <div class="rental-card__desc">Full-frame aerial cinema system. 8K ProRes RAW. Licensed operator available.</div>
+            <div class="rental-card__footer">
+              <div class="rental-card__price">$1,200 <span>/ day</span></div>
+              <button class="rental-card__btn">Book Now</button>
+            </div>
+            <div class="rental-card__tag">⚡ Low Availability</div>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="rental-card reveal">
+          <div class="rental-card__img">
+            <div class="rental-card__placeholder rental-card__placeholder--audio">🎙️</div>
+            <span class="rental-card__badge rental-card__badge--value">Best Value</span>
+          </div>
+          <div class="rental-card__body">
+            <div class="rental-card__name">Sound Kit Pro</div>
+            <div class="rental-card__desc">Sennheiser MKH 416 + 4ch wireless + Sound Devices MixPre-6 recorder. Complete audio solution.</div>
+            <div class="rental-card__footer">
+              <div class="rental-card__price">$350 <span>/ day</span></div>
+              <button class="rental-card__btn">Book Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       FOOTER
+       ════════════════════════════════════════ -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer__top">
+        <div>
+          <div class="footer__brand-name">TRANSCENDENT</div>
+          <p class="footer__brand-desc">Full-service video production, live streaming, and equipment rentals. Based in the heart of Manhattan.</p>
+        </div>
+        <div>
+          <div class="footer__col-title">Services</div>
+          <ul class="footer__col-links">
+            <li><a href="#services">Video Production</a></li>
+            <li><a href="#services">Live Streaming</a></li>
+            <li><a href="#services">Brand Films</a></li>
+            <li><a href="#rentals">Equipment Rental</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Company</div>
+          <ul class="footer__col-links">
+            <li><a href="#">About</a></li>
+            <li><a href="#work">Portfolio</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Contact</div>
+          <ul class="footer__col-links">
+            <li><a href="tel:8002691173">(800) 269-1173</a></li>
+            <li><a href="mailto:info@transcendententerprise.com">info@transcendententerprise.com</a></li>
+            <li>121 W 27th Street</li>
+            <li>Suite 1003C, New York, NY 10001</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span class="footer__copy">&copy; 2026 Transcendent Enterprise. All rights reserved.</span>
+        <div class="footer__socials">
+          <a href="#" class="footer__social" aria-label="Instagram">IG</a>
+          <a href="#" class="footer__social" aria-label="YouTube">YT</a>
+          <a href="#" class="footer__social" aria-label="LinkedIn">LI</a>
+          <a href="#" class="footer__social" aria-label="Vimeo">VM</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ════════════════════════════════════════
+       JAVASCRIPT
+       ════════════════════════════════════════ -->
+  <script>
+    // ─── Qualification Flow State ───
+    const qualState = {
+      objective: null,
+      timeline: null,
+      budget: null,
+    };
+
+    const ctaMap = {
+      'Raise Capital': { text: 'Book Capital Strategy Session', icon: '💰' },
+      'Recruit Talent': { text: 'Book Talent Campaign Call', icon: '🎯' },
+      'Scale Brand': { text: 'Book Brand Strategy Session', icon: '📈' },
+      'Live Stream': { text: 'Check Event Availability', icon: '🔴' },
+    };
+
+    function selectOption(step, el) {
+      const value = el.dataset.value;
+
+      // Remove selected state from siblings
+      el.parentElement.querySelectorAll('.qual__card').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+
+      // Store value
+      if (step === 1) qualState.objective = value;
+      if (step === 2) qualState.timeline = value;
+      if (step === 3) qualState.budget = value;
+
+      // Brief delay for visual feedback, then advance
+      setTimeout(() => advanceStep(step + 1), 300);
+    }
+
+    function advanceStep(nextStep) {
+      // Hide all steps
+      document.querySelectorAll('.qual__step').forEach(s => {
+        s.classList.remove('active');
+        s.style.display = 'none';
+      });
+
+      // Show next step
+      const next = document.querySelector(`.qual__step[data-step="${nextStep}"]`);
+      if (next) {
+        next.style.display = 'block';
+        next.classList.add('active');
+
+        // Animate with GSAP
+        gsap.fromTo(next, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
+      }
+
+      // Update progress dots
+      document.querySelectorAll('.qual__progress-dot').forEach(dot => {
+        const dotStep = parseInt(dot.dataset.step);
+        dot.classList.toggle('filled', dotStep <= nextStep);
+      });
+
+      // If step 4, populate summary
+      if (nextStep === 4) populateSummary();
+    }
+
+    function goBack(toStep) {
+      advanceStep(toStep);
+    }
+
+    function populateSummary() {
+      document.getElementById('sumObjective').textContent = qualState.objective || '—';
+      document.getElementById('sumTimeline').textContent = qualState.timeline || '—';
+      document.getElementById('sumBudget').textContent = qualState.budget || '—';
+
+      // Dynamic CTA based on objective
+      const cta = ctaMap[qualState.objective] || { text: 'Book a Strategy Session', icon: '🚀' };
+      document.getElementById('sumCta').textContent = cta.text;
+    }
+
+    // ─── Navigation ───
+    const nav = document.getElementById('nav');
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 80);
+    });
+
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('active');
+      navLinks.classList.toggle('open');
+    });
+
+    // Close mobile nav on link click
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.classList.remove('active');
+        navLinks.classList.remove('open');
+      });
+    });
+
+    // ─── GSAP Animations ───
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero entrance
+    const heroTl = gsap.timeline({ delay: 0.3 });
+    heroTl
+      .to('.hero__overtitle', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' })
+      .to('.hero__title', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, '-=0.5')
+      .to('.hero__tagline', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.6')
+      .to('.hero__cta-group', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.5')
+      .to('.hero__scroll', { opacity: 0.6, duration: 1 }, '-=0.3');
+
+    // Set initial hero states
+    gsap.set(['.hero__overtitle', '.hero__title', '.hero__tagline', '.hero__cta-group'], { y: 30 });
+
+    // Scroll reveals for .reveal elements
+    gsap.utils.toArray('.reveal').forEach(el => {
+      gsap.to(el, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          once: true,
+        },
+      });
+    });
+
+    // Coffee & TV signature — Work cards scale into viewport
+    gsap.utils.toArray('.work__card').forEach(card => {
+      gsap.fromTo(card,
+        { scale: 0.92 },
+        {
+          scale: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 90%',
+            end: 'top 30%',
+            scrub: 1,
+          },
+        }
+      );
+    });
+
+    // Rental cards stagger entrance
+    ScrollTrigger.batch('.rental-card', {
+      onEnter: batch => {
+        gsap.to(batch, {
+          opacity: 1,
+          y: 0,
+          stagger: 0.1,
+          duration: 0.6,
+          ease: 'power2.out',
+        });
+      },
+      start: 'top 85%',
+      once: true,
+    });
+
+    // Client logos subtle fade
+    gsap.utils.toArray('.clients__logo').forEach((logo, i) => {
+      gsap.fromTo(logo,
+        { opacity: 0, y: 15 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          delay: i * 0.08,
+          scrollTrigger: {
+            trigger: '.clients__grid',
+            start: 'top 85%',
+            once: true,
+          },
+        }
+      );
+    });
+
+    // Parallax on hero content
+    gsap.to('.hero__content', {
+      y: 100,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1,
+      },
+    });
+  </script>
+
+</body>
+</html>
