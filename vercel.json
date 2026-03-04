@@ -1,0 +1,80 @@
+{
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/non-profit-video-production-companies",
+      "destination": "/non-profit-video",
+      "statusCode": 301
+    },
+    {
+      "source": "/homepage/business-video-examples",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/homepage/business-video-examples/rental",
+      "destination": "/equipment-rentals",
+      "statusCode": 301
+    },
+    {
+      "source": "/manhattan-speaker-mic-rental",
+      "destination": "/equipment-rentals",
+      "statusCode": 301
+    },
+    {
+      "source": "/thank-you",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/under-construction",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/page-modules",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/city-landing",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/corporate-video-production-new-york-city/areas-we-serve",
+      "destination": "/corporate-video-production-new-york-city",
+      "statusCode": 301
+    },
+    {
+      "source": "/healthcare-medical-video-production-service",
+      "destination": "/healthcare-medical-video-production-service",
+      "statusCode": 200
+    },
+    {
+      "source": "/live-streaming",
+      "destination": "/live-streaming-services",
+      "statusCode": 301
+    },
+    {
+      "source": "/conferences-events",
+      "destination": "/conferences-events",
+      "statusCode": 200
+    },
+    {
+      "source": "/blog",
+      "destination": "/blog",
+      "statusCode": 200
+    },
+    {
+      "source": "/blog/:slug*",
+      "destination": "https://transcendententerprise.com/blog/:slug*",
+      "statusCode": 301
+    },
+    {
+      "source": "/new-website-under-construction",
+      "destination": "/blog",
+      "statusCode": 301
+    }
+  ]
+}

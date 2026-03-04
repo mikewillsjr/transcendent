@@ -4,6 +4,42 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Transcendent Enterprise — NYC Video Production & Live Streaming</title>
+  <meta name="description" content="Full-service NYC video production, live streaming, and equipment rentals. Trusted by Columbia, NYU, United Nations, Facebook, and more. 6,500+ productions since 2004. NYC to London to Ghana.">
+  <link rel="canonical" href="https://transcendententerprise.com/">
+
+  <meta property="og:title" content="Transcendent Enterprise — NYC Video Production & Live Streaming">
+  <meta property="og:description" content="Full-service NYC video production, live streaming, and equipment rentals. 6,500+ productions since 2004.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://transcendententerprise.com/">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Transcendent Enterprise",
+    "url": "https://transcendententerprise.com",
+    "logo": "https://transcendententerprise.com/media/logo.png",
+    "description": "Full-service NYC video production, live streaming, and equipment rentals. 6,500+ productions since 2004.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "121 W 27th Street, Suite 1003C",
+      "addressLocality": "New York",
+      "addressRegion": "NY",
+      "postalCode": "10001",
+      "addressCountry": "US"
+    },
+    "telephone": "+18002691173",
+    "email": "sayhi@t-enter.com",
+    "sameAs": [
+      "https://www.instagram.com/transcendententerprise",
+      "https://www.youtube.com/@transcendententerprise",
+      "https://www.linkedin.com/company/transcendent-enterprise"
+    ],
+    "foundingDate": "2004",
+    "areaServed": ["New York City", "Manhattan", "Brooklyn", "Queens", "New Jersey", "Connecticut"]
+  }
+  </script>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,1335 +50,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-  <style>
-    /* ═══════════════════════════════════════════
-       CSS CUSTOM PROPERTIES
-       ═══════════════════════════════════════════ */
-    :root {
-      --black: #0a0a0a;
-      --deep-black: #050505;
-      --dark: #121212;
-      --dark-secondary: #1a1a1a;
-      --dark-card: #161616;
-      --white: #f5f5f5;
-      --white-muted: #a0a0a0;
-      --blue: #1f6db7;
-      --blue-glow: rgba(31, 109, 183, 0.3);
-      --blue-hover: #2580d4;
-      --red: #ff0000;
-      --font-heading: 'Bebas Neue', sans-serif;
-      --font-body: 'Inter', sans-serif;
-    }
-
-    /* ═══════════════════════════════════════════
-       RESET & BASE
-       ═══════════════════════════════════════════ */
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html {
-      scroll-behavior: smooth;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    body {
-      font-family: var(--font-body);
-      background: var(--black);
-      color: var(--white);
-      overflow-x: hidden;
-      line-height: 1.6;
-      cursor: none;
-    }
-
-    /* Restore cursor on touch devices */
-    @media (pointer: coarse) {
-      body { cursor: auto; }
-    }
-
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* ═══════════════════════════════════════════
-       CUSTOM MAGNETIC CURSOR
-       ═══════════════════════════════════════════ */
-    #custom-cursor {
-      position: fixed;
-      width: 15px;
-      height: 15px;
-      background: var(--white);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      mix-blend-mode: difference;
-      transform: translate(-50%, -50%);
-      transition: width 0.3s, height 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #custom-cursor .cursor-text {
-      display: none;
-      font-size: 9px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: #000;
-      white-space: nowrap;
-    }
-
-    #custom-cursor.expanded {
-      width: 90px;
-      height: 90px;
-    }
-
-    #custom-cursor.expanded .cursor-text {
-      display: block;
-    }
-
-    @media (pointer: coarse) {
-      #custom-cursor { display: none; }
-    }
-
-    /* ═══════════════════════════════════════════
-       NAVIGATION
-       ═══════════════════════════════════════════ */
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      padding: 20px 0;
-      transition: background 0.4s, padding 0.4s, backdrop-filter 0.4s;
-    }
-
-    .nav.scrolled {
-      background: rgba(10, 10, 10, 0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      padding: 12px 0;
-    }
-
-    .nav .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .nav__logo {
-      font-family: var(--font-heading);
-      font-size: 1.5rem;
-      letter-spacing: 4px;
-      color: var(--white);
-    }
-
-    .nav__links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-      align-items: center;
-    }
-
-    .nav__links a {
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--white-muted);
-      transition: color 0.3s;
-    }
-
-    .nav__links a:hover { color: var(--white); }
-
-    .nav__cta {
-      background: var(--blue);
-      color: var(--white) !important;
-      padding: 10px 24px;
-      border-radius: 4px;
-      font-weight: 600;
-      transition: background 0.3s, transform 0.2s;
-    }
-
-    .nav__cta:hover {
-      background: var(--blue-hover);
-      transform: translateY(-1px);
-    }
-
-    /* ── Live Indicator ── */
-    .live-indicator {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      padding: 5px 14px;
-      border-radius: 20px;
-      background: rgba(255, 0, 0, 0.1);
-      border: 1px solid rgba(255, 0, 0, 0.3);
-      transition: all 0.3s ease;
-    }
-
-    .live-indicator:hover {
-      background: rgba(255, 0, 0, 0.2);
-      border-color: var(--red);
-      box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
-    }
-
-    .live-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--red);
-      border-radius: 50%;
-      animation: livePulse 1.5s ease-in-out infinite;
-    }
-
-    @keyframes livePulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.6); opacity: 0.4; }
-    }
-
-    .live-text {
-      font-size: 0.65rem;
-      font-weight: 800;
-      letter-spacing: 2px;
-      color: var(--red);
-    }
-
-    /* Mobile nav toggle */
-    .nav__toggle {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-    }
-
-    .nav__toggle span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--white);
-      transition: transform 0.3s, opacity 0.3s;
-    }
-
-    .nav__toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-    .nav__toggle.active span:nth-child(2) { opacity: 0; }
-    .nav__toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-    @media (max-width: 768px) {
-      .nav__toggle { display: flex; }
-      .nav__links {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(5, 5, 5, 0.98);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 40px;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.4s;
-        z-index: 200;
-      }
-      .nav__links.open { opacity: 1; pointer-events: all; }
-      .nav__links a { font-size: 1.4rem; letter-spacing: 3px; }
-      .live-indicator { order: -1; }
-    }
-
-    /* ═══════════════════════════════════════════
-       SECTION: HERO
-       ═══════════════════════════════════════════ */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .hero__bg {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse at 30% 50%, rgba(31, 109, 183, 0.08) 0%, transparent 60%),
-        linear-gradient(180deg, var(--deep-black) 0%, var(--dark) 100%);
-    }
-
-    .hero__grain {
-      position: absolute;
-      inset: 0;
-      opacity: 0.035;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      background-size: 128px;
-      pointer-events: none;
-    }
-
-    .hero__content {
-      position: relative;
-      text-align: center;
-      padding: 0 24px;
-      max-width: 960px;
-    }
-
-    .hero__overtitle {
-      font-family: var(--font-body);
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 24px;
-      opacity: 0;
-    }
-
-    /* v2: Tight editorial tracking like Coffee & TV */
-    .hero__title {
-      font-family: var(--font-heading);
-      font-size: clamp(5rem, 15vw, 11rem);
-      letter-spacing: -0.04em;
-      line-height: 0.85;
-      color: var(--white);
-      margin-bottom: 28px;
-      opacity: 0;
-    }
-
-    .hero__tagline {
-      font-size: clamp(1rem, 2.5vw, 1.35rem);
-      font-weight: 300;
-      color: var(--white-muted);
-      max-width: 600px;
-      margin: 0 auto 40px;
-      line-height: 1.7;
-      opacity: 0;
-    }
-
-    .hero__cta-group {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-      opacity: 0;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 32px;
-      border-radius: 4px;
-      font-family: var(--font-body);
-      font-size: 0.9rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.3s;
-      border: none;
-    }
-
-    .btn--primary {
-      background: var(--blue);
-      color: var(--white);
-    }
-
-    .btn--primary:hover {
-      background: var(--blue-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px var(--blue-glow);
-    }
-
-    .btn--ghost {
-      background: transparent;
-      color: var(--white);
-      border: 1px solid rgba(245, 245, 245, 0.2);
-    }
-
-    .btn--ghost:hover {
-      border-color: var(--white);
-      background: rgba(245, 245, 245, 0.05);
-    }
-
-    /* Scroll indicator */
-    .hero__scroll {
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      opacity: 0;
-    }
-
-    .hero__scroll-text {
-      font-size: 0.7rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--white-muted);
-    }
-
-    .hero__scroll-line {
-      width: 1px;
-      height: 40px;
-      background: linear-gradient(to bottom, var(--blue), transparent);
-      animation: scrollPulse 2s ease-in-out infinite;
-    }
-
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
-      50% { opacity: 1; transform: scaleY(1); }
-    }
-
-    /* ═══════════════════════════════════════════
-       SECTION: CLIENT LOGO BAR
-       ═══════════════════════════════════════════ */
-    .clients {
-      padding: 80px 0;
-      border-top: 1px solid rgba(245, 245, 245, 0.05);
-      border-bottom: 1px solid rgba(245, 245, 245, 0.05);
-      background: var(--black);
-    }
-
-    .clients__label {
-      text-align: center;
-      font-size: 0.75rem;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--white-muted);
-      margin-bottom: 48px;
-    }
-
-    .clients__grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 48px 64px;
-    }
-
-    .clients__logo {
-      font-family: var(--font-heading);
-      font-size: 1.5rem;
-      letter-spacing: 3px;
-      color: rgba(245, 245, 245, 0.25);
-      transition: color 0.4s;
-      white-space: nowrap;
-    }
-
-    .clients__logo:hover { color: rgba(245, 245, 245, 0.6); }
-
-    @media (max-width: 640px) {
-      .clients__grid { gap: 32px 40px; }
-      .clients__logo { font-size: 1.1rem; }
-    }
-
-    /* ═══════════════════════════════════════════
-       SECTION HEADERS (shared)
-       ═══════════════════════════════════════════ */
-    .section-header {
-      text-align: center;
-      margin-bottom: 64px;
-    }
-
-    .section-header__overtitle {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 16px;
-    }
-
-    .section-header__title {
-      font-family: var(--font-heading);
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      letter-spacing: 4px;
-      line-height: 1;
-    }
-
-    .section-header__subtitle {
-      font-size: 1.05rem;
-      font-weight: 300;
-      color: var(--white-muted);
-      max-width: 550px;
-      margin: 20px auto 0;
-      line-height: 1.7;
-    }
-
-    /* ═══════════════════════════════════════════
-       SECTION: SERVICES — QUALIFICATION FLOW
-       ═══════════════════════════════════════════ */
-    .services {
-      padding: 120px 0;
-      background: var(--dark);
-    }
-
-    .qual {
-      max-width: 800px;
-      margin: 0 auto;
-      position: relative;
-      min-height: 400px;
-    }
-
-    .qual__step {
-      display: none;
-      animation: fadeSlideUp 0.5s ease forwards;
-    }
-
-    .qual__step.active { display: block; }
-
-    @keyframes fadeSlideUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .qual__question {
-      font-family: var(--font-heading);
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      letter-spacing: 3px;
-      text-align: center;
-      margin-bottom: 12px;
-    }
-
-    .qual__step-label {
-      text-align: center;
-      font-size: 0.75rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--white-muted);
-      margin-bottom: 40px;
-    }
-
-    /* Progress bar */
-    .qual__progress {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 48px;
-      justify-content: center;
-    }
-
-    .qual__progress-dot {
-      width: 48px;
-      height: 3px;
-      border-radius: 2px;
-      background: rgba(245, 245, 245, 0.1);
-      transition: background 0.4s, opacity 0.3s;
-    }
-
-    .qual__progress-dot.filled { background: var(--blue); }
-    .qual__progress-dot.hidden { opacity: 0; width: 0; overflow: hidden; margin: 0; padding: 0; }
-
-    /* Option cards */
-    .qual__options {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .qual__options--4col {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (max-width: 768px) {
-      .qual__options { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 480px) {
-      .qual__options, .qual__options--4col { grid-template-columns: 1fr; }
-    }
-
-    /* Live tag on card */
-    .qual__card-live-tag {
-      display: none;
-      font-size: 0.6rem;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--red);
-      margin-top: 8px;
-      position: relative;
-    }
-
-    .qual__card-live-tag::before {
-      content: '';
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      background: var(--red);
-      border-radius: 50%;
-      margin-right: 6px;
-      vertical-align: middle;
-      animation: livePulse 1.5s ease-in-out infinite;
-    }
-
-    .qual__card-live-tag.visible { display: block; }
-
-    .qual__card {
-      background: var(--dark-card);
-      border: 1px solid rgba(245, 245, 245, 0.06);
-      border-radius: 8px;
-      padding: 28px 24px;
-      cursor: pointer;
-      transition: all 0.3s;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .qual__card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, var(--blue-glow), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .qual__card:hover {
-      border-color: var(--blue);
-      transform: translateY(-4px);
-      box-shadow: 0 8px 40px rgba(31, 109, 183, 0.1);
-    }
-
-    .qual__card:hover::before { opacity: 1; }
-
-    .qual__card.selected {
-      border-color: var(--blue);
-      background: rgba(31, 109, 183, 0.08);
-    }
-
-    /* Tactile tap feedback on mobile */
-    .qual__card:active {
-      transform: scale(0.98);
-    }
-
-    .qual__card-icon {
-      font-size: 2rem;
-      margin-bottom: 12px;
-      position: relative;
-    }
-
-    .qual__card-title {
-      font-family: var(--font-heading);
-      font-size: 1.3rem;
-      letter-spacing: 2px;
-      margin-bottom: 8px;
-      position: relative;
-    }
-
-    .qual__card-stat {
-      font-size: 0.75rem;
-      color: var(--blue);
-      font-weight: 600;
-      letter-spacing: 1px;
-      position: relative;
-    }
-
-    .qual__card-desc {
-      font-size: 0.85rem;
-      color: var(--white-muted);
-      position: relative;
-      margin-top: 4px;
-    }
-
-    /* v2: Glassmorphism summary */
-    .qual__summary {
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
-      padding: 40px;
-      text-align: center;
-    }
-
-    .qual__summary-list {
-      list-style: none;
-      margin: 24px 0 32px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .qual__summary-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(245, 245, 245, 0.06);
-      font-size: 0.95rem;
-    }
-
-    .qual__summary-label { color: var(--white-muted); }
-    .qual__summary-value { font-weight: 600; color: var(--white); }
-
-    .qual__summary-strategy {
-      margin-top: 8px;
-      padding: 12px 20px;
-      background: rgba(31, 109, 183, 0.08);
-      border: 1px solid rgba(31, 109, 183, 0.2);
-      border-radius: 8px;
-      font-size: 0.85rem;
-      color: var(--blue);
-      font-weight: 500;
-      letter-spacing: 0.5px;
-      display: none;
-    }
-
-    .qual__summary-strategy.visible { display: block; }
-
-    .qual__summary-live-btn {
-      display: none;
-      margin-top: 12px;
-    }
-
-    .qual__summary-live-btn.visible { display: inline-flex; }
-
-    .qual__back {
-      display: inline-block;
-      margin-top: 16px;
-      font-size: 0.85rem;
-      color: var(--white-muted);
-      cursor: pointer;
-      transition: color 0.3s;
-      background: none;
-      border: none;
-      font-family: var(--font-body);
-    }
-
-    .qual__back:hover { color: var(--white); }
-
-    /* ═══════════════════════════════════════════
-       SECTION: WORK SHOWCASE
-       ═══════════════════════════════════════════ */
-    .work {
-      padding: 120px 0;
-      background: var(--black);
-    }
-
-    .work__grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 24px;
-    }
-
-    .work__card {
-      position: relative;
-      border-radius: 8px;
-      overflow: hidden;
-      aspect-ratio: 16/10;
-      background: var(--dark-card);
-      cursor: pointer;
-      will-change: transform;
-    }
-
-    /* Tactile tap on mobile */
-    .work__card:active { transform: scale(0.98); }
-
-    .work__card-placeholder {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .work__card-placeholder--1 {
-      background: linear-gradient(135deg, #0d1b2a 0%, #1b3a5c 50%, #1f6db7 100%);
-    }
-
-    .work__card-placeholder--2 {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-    }
-
-    .work__card-placeholder--3 {
-      background: linear-gradient(135deg, #0c0c1d 0%, #1a1a3e 50%, #2d2d6e 100%);
-    }
-
-    .work__card-placeholder-text {
-      font-family: var(--font-heading);
-      font-size: 1.3rem;
-      letter-spacing: 4px;
-      color: rgba(245, 245, 245, 0.15);
-    }
-
-    .work__card-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(0deg, rgba(10, 10, 10, 0.9) 0%, transparent 50%);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 32px;
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-
-    /* Desktop hover reveal */
-    @media (pointer: fine) {
-      .work__card:hover .work__card-overlay { opacity: 1; }
-    }
-
-    .work__card-category {
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 8px;
-    }
-
-    .work__card-name {
-      font-family: var(--font-heading);
-      font-size: 1.6rem;
-      letter-spacing: 2px;
-    }
-
-    .work__card-client {
-      font-size: 0.85rem;
-      color: var(--white-muted);
-      margin-top: 4px;
-    }
-
-    @media (max-width: 640px) {
-      .work__grid { grid-template-columns: 1fr; }
-    }
-
-    /* ═══════════════════════════════════════════
-       SECTION: EQUIPMENT RENTALS
-       ═══════════════════════════════════════════ */
-    .rentals {
-      padding: 120px 0;
-      background: var(--dark);
-    }
-
-    .rentals__grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
-    }
-
-    .rental-card {
-      background: var(--dark-card);
-      border: 1px solid rgba(245, 245, 245, 0.06);
-      border-radius: 8px;
-      overflow: hidden;
-      transition: transform 0.3s, border-color 0.3s;
-    }
-
-    .rental-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(245, 245, 245, 0.12);
-    }
-
-    .rental-card:active { transform: scale(0.98); }
-
-    .rental-card__img {
-      position: relative;
-      aspect-ratio: 4/3;
-      overflow: hidden;
-    }
-
-    .rental-card__placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-    }
-
-    .rental-card__placeholder--cam { background: linear-gradient(135deg, #141e30, #243b55); }
-    .rental-card__placeholder--lens { background: linear-gradient(135deg, #1a1a2e, #1f4068); }
-    .rental-card__placeholder--light { background: linear-gradient(135deg, #2d1b3d, #1b1464); }
-    .rental-card__placeholder--studio { background: linear-gradient(135deg, #0d1117, #1a2332); }
-    .rental-card__placeholder--drone { background: linear-gradient(135deg, #1a1a1a, #2d2d2d); }
-    .rental-card__placeholder--audio { background: linear-gradient(135deg, #1a0a0a, #2d1f1f); }
-
-    .rental-card__badge {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      padding: 4px 12px;
-      border-radius: 4px;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    .rental-card__badge--popular { background: var(--blue); color: var(--white); }
-    .rental-card__badge--value { background: #2ecc71; color: #000; }
-    .rental-card__badge--limited { background: #e74c3c; color: var(--white); }
-
-    .rental-card__body { padding: 20px; }
-
-    .rental-card__name {
-      font-family: var(--font-heading);
-      font-size: 1.2rem;
-      letter-spacing: 2px;
-      margin-bottom: 4px;
-    }
-
-    .rental-card__desc {
-      font-size: 0.8rem;
-      color: var(--white-muted);
-      margin-bottom: 16px;
-      line-height: 1.5;
-    }
-
-    .rental-card__footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .rental-card__price {
-      font-family: var(--font-heading);
-      font-size: 1.5rem;
-      letter-spacing: 1px;
-    }
-
-    .rental-card__price span {
-      font-family: var(--font-body);
-      font-size: 0.75rem;
-      color: var(--white-muted);
-      font-weight: 400;
-    }
-
-    .rental-card__btn {
-      padding: 8px 20px;
-      background: transparent;
-      border: 1px solid var(--blue);
-      color: var(--blue);
-      border-radius: 4px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-family: var(--font-body);
-    }
-
-    .rental-card__btn:hover {
-      background: var(--blue);
-      color: var(--white);
-    }
-
-    .rental-card__tag {
-      display: inline-block;
-      margin-top: 8px;
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      color: #e67e22;
-    }
-
-    @media (max-width: 640px) {
-      .rentals__grid { grid-template-columns: 1fr; }
-    }
-
-    /* ═══════════════════════════════════════════
-       SECTION: FOUNDER'S VISION
-       ═══════════════════════════════════════════ */
-    .founder {
-      padding: 150px 0;
-      background: var(--black);
-      border-top: 1px solid rgba(245, 245, 245, 0.05);
-    }
-
-    .founder__grid {
-      display: grid;
-      grid-template-columns: 1fr 1.5fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .founder__portrait {
-      aspect-ratio: 4/5;
-      background: var(--dark-card);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      filter: grayscale(1);
-      border: 1px solid rgba(245, 245, 245, 0.06);
-      overflow: hidden;
-    }
-
-    .founder__portrait-placeholder {
-      font-family: var(--font-heading);
-      font-size: 1rem;
-      letter-spacing: 3px;
-      color: var(--white-muted);
-      text-align: center;
-      padding: 20px;
-    }
-
-    .founder__name {
-      font-family: var(--font-heading);
-      font-size: clamp(2rem, 4vw, 3rem);
-      letter-spacing: 2px;
-      margin-bottom: 4px;
-    }
-
-    .founder__role {
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 24px;
-    }
-
-    .founder__quote {
-      font-size: 1.15rem;
-      font-style: italic;
-      color: var(--white-muted);
-      line-height: 1.8;
-      margin-bottom: 16px;
-      max-width: 500px;
-    }
-
-    .founder__bio {
-      font-size: 0.9rem;
-      color: var(--white-muted);
-      line-height: 1.7;
-      margin-bottom: 40px;
-      max-width: 500px;
-    }
-
-    .founder__stats {
-      display: flex;
-      gap: 48px;
-    }
-
-    .founder__stat-number {
-      font-family: var(--font-heading);
-      font-size: clamp(1.8rem, 3vw, 2.4rem);
-      color: var(--blue);
-      letter-spacing: 1px;
-      line-height: 1;
-    }
-
-    .founder__stat-label {
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--white-muted);
-      margin-top: 6px;
-    }
-
-    @media (max-width: 768px) {
-      .founder__grid {
-        grid-template-columns: 1fr;
-        gap: 48px;
-        text-align: center;
-      }
-      .founder__portrait { max-width: 300px; margin: 0 auto; }
-      .founder__quote, .founder__bio { margin-left: auto; margin-right: auto; }
-      .founder__stats { justify-content: center; gap: 32px; }
-    }
-
-    /* ═══════════════════════════════════════════
-       LIVE OVERLAY
-       ═══════════════════════════════════════════ */
-    .live-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(5, 5, 5, 0.96);
-      z-index: 10000;
-      align-items: center;
-      justify-content: center;
-      padding: 40px;
-    }
-
-    .live-overlay.open { display: flex; }
-
-    .live-overlay__close {
-      position: absolute;
-      top: 32px;
-      right: 40px;
-      background: none;
-      border: none;
-      color: var(--white-muted);
-      font-size: 2rem;
-      cursor: pointer;
-      transition: color 0.3s;
-      font-family: var(--font-body);
-      line-height: 1;
-    }
-
-    .live-overlay__close:hover { color: var(--white); }
-
-    .live-overlay__content {
-      text-align: center;
-      max-width: 700px;
-    }
-
-    .live-overlay__status {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 20px;
-      border-radius: 24px;
-      background: rgba(255, 0, 0, 0.1);
-      border: 1px solid rgba(255, 0, 0, 0.3);
-      margin-bottom: 32px;
-    }
-
-    .live-overlay__viewport {
-      aspect-ratio: 16/9;
-      max-width: 100%;
-      background: var(--dark-card);
-      border-radius: 8px;
-      border: 1px solid rgba(245, 245, 245, 0.06);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 32px;
-    }
-
-    .live-overlay__lock {
-      font-size: 3rem;
-      margin-bottom: 16px;
-    }
-
-    .live-overlay__private-title {
-      font-family: var(--font-heading);
-      font-size: clamp(1.2rem, 3vw, 1.6rem);
-      letter-spacing: 4px;
-      margin-bottom: 12px;
-      animation: securePulse 3s ease-in-out infinite;
-    }
-
-    @keyframes securePulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-
-    /* Founder signature placeholder */
-    .founder__signature {
-      font-family: 'Mrs Saint Delafield', cursive;
-      font-size: clamp(2rem, 4vw, 3rem);
-      color: var(--blue);
-      margin-top: 24px;
-      opacity: 0.8;
-    }
-
-    .live-overlay__private-desc {
-      font-size: 0.9rem;
-      color: var(--white-muted);
-      line-height: 1.7;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    /* ═══════════════════════════════════════════
-       SECTION: FOOTER
-       ═══════════════════════════════════════════ */
-    .footer {
-      padding: 80px 0 40px;
-      background: var(--black);
-      border-top: 1px solid rgba(245, 245, 245, 0.05);
-    }
-
-    .footer__top {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 48px;
-      margin-bottom: 64px;
-    }
-
-    .footer__brand-name {
-      font-family: var(--font-heading);
-      font-size: 1.8rem;
-      letter-spacing: 4px;
-      margin-bottom: 16px;
-    }
-
-    .footer__brand-desc {
-      font-size: 0.85rem;
-      color: var(--white-muted);
-      line-height: 1.7;
-      max-width: 300px;
-    }
-
-    .footer__col-title {
-      font-family: var(--font-heading);
-      font-size: 1rem;
-      letter-spacing: 3px;
-      margin-bottom: 20px;
-      color: var(--white);
-    }
-
-    .footer__col-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .footer__col-links a {
-      font-size: 0.85rem;
-      color: var(--white-muted);
-      transition: color 0.3s;
-    }
-
-    .footer__col-links a:hover { color: var(--white); }
-
-    .footer__bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 32px;
-      border-top: 1px solid rgba(245, 245, 245, 0.05);
-    }
-
-    .footer__copy {
-      font-size: 0.8rem;
-      color: var(--white-muted);
-    }
-
-    .footer__socials {
-      display: flex;
-      gap: 20px;
-    }
-
-    .footer__social {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: 1px solid rgba(245, 245, 245, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      color: var(--white-muted);
-      transition: all 0.3s;
-    }
-
-    .footer__social:hover {
-      border-color: var(--blue);
-      color: var(--blue);
-      background: rgba(31, 109, 183, 0.1);
-    }
-
-    @media (max-width: 768px) {
-      .footer__top { grid-template-columns: 1fr 1fr; gap: 32px; }
-    }
-
-    @media (max-width: 480px) {
-      .footer__top { grid-template-columns: 1fr; }
-      .footer__bottom { flex-direction: column; gap: 16px; text-align: center; }
-    }
-
-    /* ═══════════════════════════════════════════
-       SCARCITY BANNER
-       ═══════════════════════════════════════════ */
-    .scarcity-banner {
-      background: var(--blue);
-      color: var(--white);
-      padding: 12px 0;
-      text-align: center;
-      position: relative;
-      z-index: 101;
-      transform: translateY(-100%);
-    }
-
-    .scarcity-banner .container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .scarcity-badge {
-      display: inline-block;
-      background: var(--white);
-      color: var(--blue);
-      padding: 3px 12px;
-      border-radius: 4px;
-      font-size: 0.65rem;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    .scarcity-banner__text {
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-    }
-
-    .scarcity-banner__cta {
-      font-size: 0.8rem;
-      font-weight: 800;
-      text-decoration: underline;
-      white-space: nowrap;
-    }
-
-    @media (max-width: 640px) {
-      .scarcity-banner .container { gap: 8px; }
-      .scarcity-banner__text { font-size: 0.7rem; }
-    }
-
-    /* Priority booking pulse on high-budget selections */
-    .priority-pulse {
-      display: none;
-      align-items: center;
-      gap: 8px;
-      margin-top: 12px;
-      justify-content: center;
-    }
-
-    .priority-pulse.visible { display: flex; }
-
-    .priority-pulse__dot {
-      width: 8px;
-      height: 8px;
-      background: var(--red);
-      border-radius: 50%;
-      animation: livePulse 1.5s ease-in-out infinite;
-    }
-
-    .priority-pulse__text {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--red);
-      letter-spacing: 0.5px;
-    }
-
-    /* ═══════════════════════════════════════════
-       UTILITY
-       ═══════════════════════════════════════════ */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-    }
-
-    ::selection {
-      background: var(--blue);
-      color: var(--white);
-    }
-  </style>
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="css/global.css">
 </head>
 <body>
 
@@ -1350,58 +59,111 @@
   <div id="custom-cursor"><span class="cursor-text">VIEW</span></div>
 
   <!-- ════════════════════════════════════════
-       SCARCITY BANNER
+       NAVIGATION — invisible, corner-pinned
        ════════════════════════════════════════ -->
-  <div class="scarcity-banner" id="scarcityBanner">
-    <div class="container">
-      <span class="scarcity-badge">Limited Capacity</span>
-      <span class="scarcity-banner__text">Now booking Q3/Q4 global summits. Only 4 dates remaining for premium broadcast teams.</span>
-      <a href="#services" class="scarcity-banner__cta">Secure Your Date &rarr;</a>
-    </div>
-  </div>
-
-  <!-- ════════════════════════════════════════
-       NAVIGATION
-       ════════════════════════════════════════ -->
-  <nav class="nav" id="nav">
-    <div class="container">
-      <a href="#" class="nav__logo">TRANSCENDENT</a>
-      <button class="nav__toggle" id="navToggle" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav__links" id="navLinks">
-        <li><a href="#work">Work</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#rentals">Rentals</a></li>
-        <li>
-          <div class="live-indicator" id="liveIndicator" onclick="toggleLiveOverlay()">
-            <span class="live-dot"></span>
-            <span class="live-text">LIVE</span>
-          </div>
-        </li>
-        <li><a href="#contact" class="nav__cta">Get Started</a></li>
-      </ul>
-    </div>
+  <nav class="nav nav--transparent" id="nav">
+    <a href="index.html" class="nav__logo">TRANSCENDENT</a>
+    <button class="nav__toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li>
+        <div class="live-indicator" id="liveIndicator">
+          <span class="live-dot"></span>
+          <span class="live-text">LIVE</span>
+        </div>
+      </li>
+    </ul>
   </nav>
 
   <!-- ════════════════════════════════════════
-       HERO
+       PAGE WRAP — scales on Command Center open
+       ════════════════════════════════════════ -->
+  <div class="page-wrap" id="pageWrap">
+
+  <!-- ════════════════════════════════════════
+       HERO — Full-bleed video sizzle + bottom-fold trap
        ════════════════════════════════════════ -->
   <section class="hero" id="hero">
+    <div class="hero__video-wrap">
+      <video autoplay muted loop playsinline>
+        <source src="media/hero-bg.mp4" type="video/mp4">
+      </video>
+    </div>
     <div class="hero__bg"></div>
     <div class="hero__grain"></div>
-    <div class="hero__content">
-      <p class="hero__overtitle">NYC's Premier Production Company</p>
+    <div class="hero__content" id="heroContent">
+      <p class="hero__overtitle">NYC's Premier Production Company — Since 2004</p>
       <h1 class="hero__title">TRANSCENDENT</h1>
-      <p class="hero__tagline">We don't just film events. We fund missions.</p>
-      <div class="hero__cta-group">
-        <a href="#services" class="btn btn--primary">Start Your Project</a>
-        <a href="#work" class="btn btn--ghost">View Our Work</a>
-      </div>
+      <p class="hero__tagline">6,500+ productions. 18+ years. Corporate video that moves people.</p>
     </div>
     <div class="hero__scroll">
       <span class="hero__scroll-text">Scroll</span>
       <div class="hero__scroll-line"></div>
+    </div>
+    <div class="hero__trap" id="heroTrap">
+      <span class="hero__trap-word" data-drawer="corporate">CORPORATE</span>
+      <span class="hero__trap-word" data-drawer="events">EVENTS</span>
+      <span class="hero__trap-word" data-drawer="live">LIVE</span>
+      <span class="hero__trap-word" data-drawer="podcast">PODCAST</span>
+      <span class="hero__trap-word" data-drawer="global">GLOBAL</span>
+      <span class="hero__trap-word" data-drawer="rentals">RENTALS</span>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       STORY — Cinematic magazine grid
+       ════════════════════════════════════════ -->
+  <section class="story story--magazine" id="story">
+    <div class="story__video-bg">
+      <video autoplay muted loop playsinline>
+        <source src="media/videography.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="story__grid">
+
+      <!-- Block 1: Wide prose + trigger -->
+      <div class="story__block story__block--wide">
+        <div class="story__prose">
+          Since 2004, we've turned corporate video from checkbox to competitive advantage. While everyone else makes forgettable content, we make the kind of video people actually watch — and share.
+          <span class="trigger" data-drawer="corporate">CORPORATE VIDEO. REIMAGINED.</span>
+        </div>
+      </div>
+
+      <!-- Block 2: Narrow pull-quote + events trigger -->
+      <div class="story__block story__block--narrow">
+        <div class="story__prose">
+          6,500+ productions. Columbia. NYU. Mount Sinai. Amazon. United Nations. The clients change. The standard doesn't.
+          <span class="trigger" data-drawer="events">EVERY EVENT. DOCUMENTED.</span>
+        </div>
+      </div>
+
+      <!-- Block 3: Half left -->
+      <div class="story__block story__block--half-left">
+        <div class="story__prose">
+          From 1 camera to 12. From boardroom to Carnegie Hall. Our in-house crew and equipment go wherever the story is — and we've never missed a frame.
+          <span class="trigger trigger--live" data-drawer="live"><span class="trigger__dot"></span>LIVE IS WHAT WE DO.</span>
+        </div>
+      </div>
+
+      <!-- Block 4: Half right -->
+      <div class="story__block story__block--half-right">
+        <div class="story__prose">
+          One session. Twenty assets. LinkedIn. YouTube. Broadcast. We don't just press record — we build your content library in a single day.
+          <span class="trigger" data-drawer="podcast">THE STUDIO IS READY.</span>
+        </div>
+      </div>
+
+      <!-- Block 5: Centered offset -->
+      <div class="story__block story__block--offset">
+        <div class="story__prose">
+          NYC to London to Ghana to Jamaica. Same crew ethic, same zero-compromise quality. Your production doesn't stop at the city line.
+          <span class="trigger" data-drawer="global">WE GO WHERE YOU GO.</span>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -1424,15 +186,374 @@
   </section>
 
   <!-- ════════════════════════════════════════
-       SERVICES — QUALIFICATION FLOW
+       WORK SHOWCASE + video bg
        ════════════════════════════════════════ -->
-  <section class="services" id="services">
+  <section class="work section--video-bg" id="work">
+    <div class="section__video-bg">
+      <video autoplay muted loop playsinline>
+        <source src="media/fitness.mp4" type="video/mp4">
+      </video>
+    </div>
     <div class="container">
       <div class="section-header reveal">
-        <p class="section-header__overtitle">Services</p>
-        <h2 class="section-header__title">Let's Build Your Vision</h2>
-        <p class="section-header__subtitle">Tell us about your project and we'll craft a custom approach.</p>
+        <p class="section-header__overtitle">Selected Work</p>
+        <h2 class="section-header__title">Stories That Move People</h2>
+        <p class="section-header__subtitle">From galas at Carnegie Hall to global livestreams — every frame tells a story.</p>
       </div>
+
+      <div class="work__grid">
+        <div class="work__card reveal">
+          <div class="work__card-placeholder work__card-placeholder--1">
+            <span class="work__card-placeholder-text">COLUMBIA GALA 2024</span>
+          </div>
+          <div class="work__card-overlay">
+            <span class="work__card-category">Fundraising Event</span>
+            <span class="work__card-name">Annual Scholarship Gala</span>
+            <span class="work__card-client">Columbia University — $2.3M Raised</span>
+          </div>
+        </div>
+
+        <div class="work__card reveal">
+          <div class="work__card-placeholder work__card-placeholder--2">
+            <span class="work__card-placeholder-text">UN GLOBAL SUMMIT</span>
+          </div>
+          <div class="work__card-overlay">
+            <span class="work__card-category">Live Stream</span>
+            <span class="work__card-name">Global Climate Summit</span>
+            <span class="work__card-client">United Nations — 340K Live Viewers</span>
+          </div>
+        </div>
+
+        <div class="work__card reveal">
+          <div class="work__card-placeholder work__card-placeholder--3">
+            <span class="work__card-placeholder-text">MOUNT SINAI CAMPAIGN</span>
+          </div>
+          <div class="work__card-overlay">
+            <span class="work__card-category">Brand Film</span>
+            <span class="work__card-name">Frontline Heroes</span>
+            <span class="work__card-client">Mount Sinai Health System</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       FOUNDER'S VISION + video bg (living portrait)
+       ════════════════════════════════════════ -->
+  <section class="founder section--video-bg reveal">
+    <div class="section__video-bg">
+      <video autoplay muted loop playsinline>
+        <source src="media/videography.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="container">
+      <div class="founder__grid">
+        <div class="founder__portrait">
+          <div class="founder__portrait-placeholder">CHRIS ALVAREZ<br>B&W PORTRAIT</div>
+        </div>
+        <div>
+          <p class="section-header__overtitle">Founder's Vision</p>
+          <h2 class="founder__name">Chris Alvarez</h2>
+          <p class="founder__role">Founder & Creative Director</p>
+          <p class="founder__quote">"Corporate video doesn't have to be boring. We've spent 18 years proving it."</p>
+          <p class="founder__bio">Chris leads an innovative NYC crew that has worked with Columbia, NYU, Meta, and the United Nations. From a single camera to a 12-camera live broadcast, Transcendent Enterprise has been the backbone of high-stakes productions since 2004.</p>
+          <div class="founder__stats">
+            <div>
+              <div class="founder__stat-number">18+</div>
+              <div class="founder__stat-label">Years Experience</div>
+            </div>
+            <div>
+              <div class="founder__stat-number">6,500+</div>
+              <div class="founder__stat-label">Productions</div>
+            </div>
+            <div>
+              <div class="founder__stat-number">$100M+</div>
+              <div class="founder__stat-label">Raised at Events</div>
+            </div>
+          </div>
+          <div class="founder__signature">Chris Alvarez</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       FOOTER
+       ════════════════════════════════════════ -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer__top">
+        <div>
+          <div class="footer__brand-name">TRANSCENDENT</div>
+          <p class="footer__brand-desc">Full-service video production, live streaming, and equipment rentals. Based in the heart of Manhattan.</p>
+        </div>
+        <div>
+          <div class="footer__col-title">Services</div>
+          <ul class="footer__col-links">
+            <li><a href="corporate-video-production.html">Corporate Video</a></li>
+            <li><a href="live-streaming-services.html">Live Streaming</a></li>
+            <li><a href="event-video-production.html">Event Production</a></li>
+            <li><a href="non-profit-video.html">Fundraising Films</a></li>
+            <li><a href="brand-content.html">Brand Content</a></li>
+            <li><a href="healthcare-medical-video-production-service.html">Healthcare Video</a></li>
+            <li><a href="podcast-thought-leadership.html">Podcast Production</a></li>
+            <li><a href="conferences-events.html">Conferences</a></li>
+            <li><a href="higher-education-video-production-company.html">Education Video</a></li>
+            <li><a href="conference-video-production.html">Conference Production</a></li>
+            <li><a href="virtual-event-producer-nyc.html">Virtual Events</a></li>
+            <li><a href="promotional-video-services.html">Promotional Video</a></li>
+            <li><a href="video-studio-installation-company-nyc.html">Studio Installation</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Company</div>
+          <ul class="footer__col-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="equipment-rentals.html">Equipment</a></li>
+            <li><a href="office-space.html">Studio 1003C</a></li>
+            <li><a href="blog.html">Editorial</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Contact</div>
+          <ul class="footer__col-links">
+            <li><a href="tel:8002691173">(800) 269-1173</a></li>
+            <li><a href="mailto:info@transcendententerprise.com">info@transcendententerprise.com</a></li>
+            <li>121 W 27th Street</li>
+            <li>Suite 1003C, New York, NY 10001</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span class="footer__copy">&copy; 2026 Transcendent Enterprise. All rights reserved. <a href="privacy-policy.html" style="color:var(--white-muted); margin-left:16px;">Privacy</a> <a href="terms-of-use.html" style="color:var(--white-muted); margin-left:8px;">Terms</a></span>
+        <div class="footer__socials">
+          <a href="#" class="footer__social" aria-label="Instagram">IG</a>
+          <a href="#" class="footer__social" aria-label="YouTube">YT</a>
+          <a href="#" class="footer__social" aria-label="LinkedIn">LI</a>
+          <a href="#" class="footer__social" aria-label="Vimeo">VM</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  </div><!-- /.page-wrap -->
+
+  <!-- ════════════════════════════════════════
+       DRAWERS — 5 cinematic overlays
+       ════════════════════════════════════════ -->
+
+  <!-- Drawer: Corporate Video -->
+  <div class="drawer" id="drawer-corporate">
+    <button class="drawer__close" onclick="closeDrawer('corporate')">&times;</button>
+    <span class="terminal-label terminal-label--tl">AUTH_STATUS: ENCRYPTED_LEVEL_3</span>
+    <span class="terminal-label terminal-label--tr">UPLINK_01: NYC_HQ_TERMINAL_1003C</span>
+    <span class="terminal-label terminal-label--bl">LATENCY: 14MS // BITRATE: 45MBPS</span>
+    <span class="terminal-label terminal-label--br">ISO_9001_COMPLIANT // EST. 2004</span>
+    <div class="drawer__inner">
+      <div class="drawer__content">
+        <p class="drawer__overtitle">Corporate Video Production</p>
+        <h2 class="drawer__title">CORPORATE VIDEO. REIMAGINED.</h2>
+        <p class="drawer__text">Corporate video doesn't have to be boring. We've spent 18 years proving it. Brand films, training videos, product launches, recruiting content — if it has a camera pointed at it, we make it unforgettable.</p>
+        <div class="drawer__stats">
+          <div class="drawer__stat">
+            <span class="drawer__stat-num">6,500+</span>
+            <span class="drawer__stat-label">Productions</span>
+          </div>
+          <div class="drawer__stat">
+            <span class="drawer__stat-num">18+</span>
+            <span class="drawer__stat-label">Years</span>
+          </div>
+          <div class="drawer__stat">
+            <span class="drawer__stat-num">200+</span>
+            <span class="drawer__stat-label">Brands</span>
+          </div>
+        </div>
+        <div class="drawer__clients">
+          <span>COLUMBIA</span>
+          <span>NYU</span>
+          <span>AMAZON</span>
+          <span>FACEBOOK</span>
+        </div>
+        <button class="btn btn--primary" onclick="openCommandCenter()">Start Your Project</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drawer: Events -->
+  <div class="drawer" id="drawer-events">
+    <button class="drawer__close" onclick="closeDrawer('events')">&times;</button>
+    <div class="drawer__inner">
+      <div class="drawer__content">
+        <p class="drawer__overtitle">Event Coverage & Documentation</p>
+        <h2 class="drawer__title">EVERY EVENT. DOCUMENTED.</h2>
+        <p class="drawer__text">Conferences, galas, fundraisers, corporate summits. We've covered them all with zero-failure multi-cam setups. Our clients have raised $100M+ at events we produced — because great production makes people open their wallets.</p>
+        <div class="drawer__stats">
+          <div class="drawer__stat">
+            <span class="drawer__stat-num">$100M+</span>
+            <span class="drawer__stat-label">Raised at Events</span>
+          </div>
+          <div class="drawer__stat">
+            <span class="drawer__stat-num">500+</span>
+            <span class="drawer__stat-label">Events</span>
+          </div>
+          <div class="drawer__stat">
+            <span class="drawer__stat-num">0</span>
+            <span class="drawer__stat-label">Failures</span>
+          </div>
+        </div>
+        <div class="drawer__clients">
+          <span>UNITED NATIONS</span>
+          <span>CARNEGIE HALL</span>
+          <span>MOUNT SINAI</span>
+        </div>
+        <button class="btn btn--primary" onclick="openCommandCenter()">Book Event Coverage</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drawer: Live -->
+  <div class="drawer" id="drawer-live">
+    <button class="drawer__close" onclick="closeDrawer('live')">&times;</button>
+    <div class="drawer__inner">
+      <div class="drawer__content">
+        <div class="drawer__live-status">
+          <span class="live-dot"></span>
+          <span class="live-text">LIVE STREAMING</span>
+        </div>
+        <h2 class="drawer__title">ZERO-FAILURE BROADCAST</h2>
+        <p class="drawer__text">Multi-camera live production for events where failure is not an option. Our 12-camera infrastructure handles 500K+ concurrent viewers with zero lag. Private executive streams. Public galas. Global summits.</p>
+        <div class="drawer__viewport">
+          <div class="drawer__viewport-inner">
+            <div style="font-size:3rem; margin-bottom:16px;">&#x1F512;</div>
+            <div class="drawer__viewport-title">PRIVATE EXECUTIVE BROADCAST</div>
+            <p class="drawer__viewport-desc">Currently managing a high-security executive stream. Our zero-lag infrastructure handles 500K+ concurrent viewers.</p>
+          </div>
+        </div>
+        <div class="drawer__stats">
+          <div class="drawer__stat">
+            <span class="drawer__stat-num">500K+</span>
+            <span class="drawer__stat-label">Live Viewers</span>
+          </div>
+          <div class="drawer__stat">
+            <span class="drawer__stat-num">12</span>
+            <span class="drawer__stat-label">Camera Infrastructure</span>
+          </div>
+          <div class="drawer__stat">
+            <span class="drawer__stat-num">0</span>
+            <span class="drawer__stat-label">Failures</span>
+          </div>
+        </div>
+        <button class="btn btn--primary" onclick="openCommandCenter()">Secure Your Live Event Date</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drawer: Podcast -->
+  <div class="drawer" id="drawer-podcast">
+    <button class="drawer__close" onclick="closeDrawer('podcast')">&times;</button>
+    <div class="drawer__inner">
+      <div class="drawer__content">
+        <p class="drawer__overtitle">Podcast & Content Production</p>
+        <h2 class="drawer__title">ONE SESSION. TWENTY ASSETS.</h2>
+        <p class="drawer__text">Broadcast-quality visual podcasts for LinkedIn and YouTube. One recording session generates 20+ cinematic assets — clips, reels, audiograms, and full episodes. We build your content library in a single session.</p>
+        <div class="drawer__stats">
+          <div class="drawer__stat">
+            <span class="drawer__stat-num">20+</span>
+            <span class="drawer__stat-label">Assets Per Session</span>
+          </div>
+          <div class="drawer__stat">
+            <span class="drawer__stat-num">4K</span>
+            <span class="drawer__stat-label">Broadcast Quality</span>
+          </div>
+        </div>
+        <div class="drawer__clients">
+          <span>COLUMBIA</span>
+          <span>NYU</span>
+          <span>MOUNT SINAI</span>
+        </div>
+        <button class="btn btn--primary" onclick="openCommandCenter()">Book Podcast Studio Session</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drawer: Global -->
+  <div class="drawer" id="drawer-global">
+    <button class="drawer__close" onclick="closeDrawer('global')">&times;</button>
+    <div class="drawer__inner">
+      <div class="drawer__content">
+        <p class="drawer__overtitle">International Production</p>
+        <h2 class="drawer__title">WE GO WHERE YOU GO.</h2>
+        <p class="drawer__text">NYC is home. The world is our set. We've produced in Ghana, London, Sweden, Jamaica, and across the US. Same crew, same equipment, same standard — no matter the timezone.</p>
+        <div class="drawer__stats">
+          <div class="drawer__stat">
+            <span class="drawer__stat-num">5+</span>
+            <span class="drawer__stat-label">Countries</span>
+          </div>
+          <div class="drawer__stat">
+            <span class="drawer__stat-num">In-House</span>
+            <span class="drawer__stat-label">Equipment</span>
+          </div>
+          <div class="drawer__stat">
+            <span class="drawer__stat-num">24hr</span>
+            <span class="drawer__stat-label">Turnaround</span>
+          </div>
+        </div>
+        <div class="drawer__clients">
+          <span>UNITED NATIONS</span>
+          <span>AMAZON</span>
+        </div>
+        <button class="btn btn--primary" onclick="openCommandCenter()">Plan International Production</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drawer: Rentals -->
+  <div class="drawer" id="drawer-rentals">
+    <button class="drawer__close" onclick="closeDrawer('rentals')">&times;</button>
+    <div class="drawer__inner">
+      <div class="drawer__content">
+        <p class="drawer__overtitle">Equipment & Studio Rentals</p>
+        <h2 class="drawer__title">IN-HOUSE. READY TO ROLL.</h2>
+        <p class="drawer__text">Our studio at 121 W 27th St, Suite 1003C has everything you need. Cameras, lenses, lighting, audio, grip — all maintained by our production crew, all available now.</p>
+        <div class="drawer__stats">
+          <div class="drawer__stat">
+            <span class="drawer__stat-num">Full</span>
+            <span class="drawer__stat-label">Inventory</span>
+          </div>
+          <div class="drawer__stat">
+            <span class="drawer__stat-num">1003C</span>
+            <span class="drawer__stat-label">Studio</span>
+          </div>
+          <div class="drawer__stat">
+            <span class="drawer__stat-num">Same-Day</span>
+            <span class="drawer__stat-label">Pickup</span>
+          </div>
+        </div>
+        <a href="equipment-rentals.html" class="btn btn--primary">Browse Equipment</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       COMMAND CENTER — qual form in glassmorphism drawer
+       ════════════════════════════════════════ -->
+  <button class="cmd-trigger" id="cmdTrigger" onclick="openCommandCenter()">
+    <span class="cmd-trigger__dot"></span>
+    <span class="cmd-trigger__label">START YOUR PRODUCTION</span>
+  </button>
+
+  <div class="cmd-center" id="cmdCenter">
+    <button class="cmd-center__close" onclick="closeCommandCenter()">&times;</button>
+    <span class="terminal-label terminal-label--tl">AUTH_STATUS: ENCRYPTED_LEVEL_3</span>
+    <span class="terminal-label terminal-label--tr">UPLINK_01: NYC_HQ_TERMINAL_1003C</span>
+    <span class="terminal-label terminal-label--bl">LATENCY: 14MS // BITRATE: 45MBPS</span>
+    <span class="terminal-label terminal-label--br">ISO_9001_COMPLIANT // EST. 2004</span>
+    <div class="cmd-center__inner">
+      <h2>START YOUR PROJECT</h2>
 
       <div class="qual" id="qual">
         <!-- Progress -->
@@ -1449,42 +570,42 @@
           <h3 class="qual__question">What Is Your Primary Objective?</h3>
           <p class="qual__step-label">Step 1 of 4</p>
           <div class="qual__options">
-            <div class="qual__card" data-value="Raise Capital" onclick="selectOption(1, this)">
-              <div class="qual__card-icon">💰</div>
-              <div class="qual__card-title">Raise Capital</div>
-              <div class="qual__card-stat">$100M+ Raised for Clients</div>
-              <div class="qual__card-desc">Non-profit galas, fundraisers & investor events</div>
+            <div class="qual__card" data-value="Corporate Video" onclick="selectOption(1, this)">
+              <div class="qual__card-icon">🎬</div>
+              <div class="qual__card-title">Corporate Video</div>
+              <div class="qual__card-stat">6,500+ Productions</div>
+              <div class="qual__card-desc">Brand films, training, product launches</div>
             </div>
-            <div class="qual__card" data-value="Recruit Talent" onclick="selectOption(1, this)">
-              <div class="qual__card-icon">🎯</div>
-              <div class="qual__card-title">Recruit Talent</div>
-              <div class="qual__card-stat">Fortune 500 Campaigns</div>
-              <div class="qual__card-desc">Employer branding, culture videos & recruiting events</div>
-            </div>
-            <div class="qual__card" data-value="Scale Brand" onclick="selectOption(1, this)">
-              <div class="qual__card-icon">📈</div>
-              <div class="qual__card-title">Scale Brand</div>
-              <div class="qual__card-stat">200+ Brand Campaigns</div>
-              <div class="qual__card-desc">Commercial production, social content & brand films</div>
+            <div class="qual__card" data-value="Event Coverage" onclick="selectOption(1, this)">
+              <div class="qual__card-icon">🏛️</div>
+              <div class="qual__card-title">Event Coverage</div>
+              <div class="qual__card-stat">500+ Events Documented</div>
+              <div class="qual__card-desc">Conferences, galas, fundraisers, summits</div>
             </div>
             <div class="qual__card" data-value="Live Stream" onclick="selectOption(1, this)">
               <div class="qual__card-icon">🔴</div>
               <div class="qual__card-title">Live Stream</div>
               <div class="qual__card-stat">500K+ Live Viewers</div>
-              <div class="qual__card-desc">Multi-camera live production & virtual events</div>
+              <div class="qual__card-desc">Multi-camera live production</div>
               <div class="qual__card-live-tag visible" id="liveStreamTag">LIVE PRODUCTION IN PROGRESS</div>
             </div>
-            <div class="qual__card" data-value="Podcast & Thought Leadership" onclick="selectOption(1, this)">
+            <div class="qual__card" data-value="Podcast & Content" onclick="selectOption(1, this)">
               <div class="qual__card-icon">🎙️</div>
-              <div class="qual__card-title">Podcast</div>
-              <div class="qual__card-stat">1 Session → 20+ Cinematic Assets</div>
-              <div class="qual__card-desc">Broadcast-quality visual podcasts for LinkedIn & YouTube</div>
+              <div class="qual__card-title">Podcast & Content</div>
+              <div class="qual__card-stat">1 Session → 20+ Assets</div>
+              <div class="qual__card-desc">Visual podcasts for LinkedIn & YouTube</div>
             </div>
-            <div class="qual__card" data-value="Conferences & Summits" onclick="selectOption(1, this)">
-              <div class="qual__card-icon">🏛️</div>
-              <div class="qual__card-title">Conferences</div>
-              <div class="qual__card-stat">Zero-Failure Multi-Cam Coverage</div>
-              <div class="qual__card-desc">High-stakes summit documentation for global organizations</div>
+            <div class="qual__card" data-value="Photography" onclick="selectOption(1, this)">
+              <div class="qual__card-icon">📸</div>
+              <div class="qual__card-title">Photography</div>
+              <div class="qual__card-stat">18+ Years Experience</div>
+              <div class="qual__card-desc">Event photography, headshots, product shoots</div>
+            </div>
+            <div class="qual__card" data-value="Equipment Rental" onclick="selectOption(1, this)">
+              <div class="qual__card-icon">🎥</div>
+              <div class="qual__card-title">Equipment Rental</div>
+              <div class="qual__card-stat">In-House Pro Gear</div>
+              <div class="qual__card-desc">Cameras, lenses, lighting, studio space</div>
             </div>
           </div>
         </div>
@@ -1548,7 +669,7 @@
               <div class="qual__card-desc">No date yet</div>
             </div>
           </div>
-          <button class="qual__back" onclick="goBack(qualState.objective === 'Scale Brand' ? 1.5 : 1)">&larr; Back</button>
+          <button class="qual__back" onclick="goBack(1)">&larr; Back</button>
         </div>
 
         <!-- Step 3: Budget -->
@@ -1583,6 +704,10 @@
         <!-- Step 4: Summary + CTA -->
         <div class="qual__step" data-step="4">
           <div class="qual__summary">
+            <div class="qual__summary-verified" id="sumVerified">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              <span>Strategy Verified</span>
+            </div>
             <h3 class="qual__question" id="summaryTitle">Your Custom Project Brief</h3>
             <ul class="qual__summary-list">
               <li class="qual__summary-item">
@@ -1599,7 +724,7 @@
               </li>
             </ul>
             <div class="qual__summary-strategy" id="sumStrategy"></div>
-            <a href="#contact" class="btn btn--primary" id="sumCta" style="margin-top:24px">Book a Strategy Session</a>
+            <a href="#contact" class="btn btn--primary" id="sumCta" style="margin-top:24px" onclick="closeCommandCenter()">Confirm Strategy Selection</a>
             <button class="btn btn--ghost qual__summary-live-btn" id="sumLiveBtn" onclick="toggleLiveOverlay()" style="margin-top:12px">View Live Production Specs</button>
             <div class="priority-pulse" id="priorityPulse">
               <span class="priority-pulse__dot"></span>
@@ -1613,247 +738,7 @@
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- ════════════════════════════════════════
-       WORK SHOWCASE
-       ════════════════════════════════════════ -->
-  <section class="work" id="work">
-    <div class="container">
-      <div class="section-header reveal">
-        <p class="section-header__overtitle">Selected Work</p>
-        <h2 class="section-header__title">Stories That Move People</h2>
-        <p class="section-header__subtitle">From galas at Carnegie Hall to global livestreams — every frame tells a story.</p>
-      </div>
-
-      <div class="work__grid">
-        <div class="work__card reveal">
-          <div class="work__card-placeholder work__card-placeholder--1">
-            <span class="work__card-placeholder-text">COLUMBIA GALA 2024</span>
-          </div>
-          <div class="work__card-overlay">
-            <span class="work__card-category">Fundraising Event</span>
-            <span class="work__card-name">Annual Scholarship Gala</span>
-            <span class="work__card-client">Columbia University — $2.3M Raised</span>
-          </div>
-        </div>
-
-        <div class="work__card reveal">
-          <div class="work__card-placeholder work__card-placeholder--2">
-            <span class="work__card-placeholder-text">UN GLOBAL SUMMIT</span>
-          </div>
-          <div class="work__card-overlay">
-            <span class="work__card-category">Live Stream</span>
-            <span class="work__card-name">Global Climate Summit</span>
-            <span class="work__card-client">United Nations — 340K Live Viewers</span>
-          </div>
-        </div>
-
-        <div class="work__card reveal">
-          <div class="work__card-placeholder work__card-placeholder--3">
-            <span class="work__card-placeholder-text">MOUNT SINAI CAMPAIGN</span>
-          </div>
-          <div class="work__card-overlay">
-            <span class="work__card-category">Brand Film</span>
-            <span class="work__card-name">Frontline Heroes</span>
-            <span class="work__card-client">Mount Sinai Health System</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════════════════════════════════════
-       EQUIPMENT RENTALS
-       ════════════════════════════════════════ -->
-  <section class="rentals" id="rentals">
-    <div class="container">
-      <div class="section-header reveal">
-        <p class="section-header__overtitle">Equipment & Spaces</p>
-        <h2 class="section-header__title">Production-Ready Rentals</h2>
-        <p class="section-header__subtitle">Cinema-grade gear and studio space available for your next project.</p>
-      </div>
-
-      <div class="rentals__grid">
-        <div class="rental-card reveal">
-          <div class="rental-card__img">
-            <div class="rental-card__placeholder rental-card__placeholder--cam">🎥</div>
-            <span class="rental-card__badge rental-card__badge--popular">Most Popular</span>
-          </div>
-          <div class="rental-card__body">
-            <div class="rental-card__name">RED V-Raptor XL</div>
-            <div class="rental-card__desc">8K cinema camera with global shutter. Perfect for commercial and narrative shoots.</div>
-            <div class="rental-card__footer">
-              <div class="rental-card__price">$850 <span>/ day</span></div>
-              <button class="rental-card__btn">Book Now</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="rental-card reveal">
-          <div class="rental-card__img">
-            <div class="rental-card__placeholder rental-card__placeholder--lens">🔭</div>
-            <span class="rental-card__badge rental-card__badge--value">Best Value</span>
-          </div>
-          <div class="rental-card__body">
-            <div class="rental-card__name">Cooke S7/i Prime Set</div>
-            <div class="rental-card__desc">Full-frame cinema primes (25, 32, 50, 75, 100mm). The Cooke Look™ for every focal length.</div>
-            <div class="rental-card__footer">
-              <div class="rental-card__price">$600 <span>/ day</span></div>
-              <button class="rental-card__btn">Book Now</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="rental-card reveal">
-          <div class="rental-card__img">
-            <div class="rental-card__placeholder rental-card__placeholder--light">💡</div>
-          </div>
-          <div class="rental-card__body">
-            <div class="rental-card__name">ARRI SkyPanel S360-C</div>
-            <div class="rental-card__desc">Premium soft LED panel with full RGBW color control. Industry-standard key light.</div>
-            <div class="rental-card__footer">
-              <div class="rental-card__price">$400 <span>/ day</span></div>
-              <button class="rental-card__btn">Book Now</button>
-            </div>
-            <div class="rental-card__tag">⚡ Low Availability</div>
-          </div>
-        </div>
-
-        <div class="rental-card reveal">
-          <div class="rental-card__img">
-            <div class="rental-card__placeholder rental-card__placeholder--studio">🏢</div>
-            <span class="rental-card__badge rental-card__badge--popular">Featured</span>
-          </div>
-          <div class="rental-card__body">
-            <div class="rental-card__name">Chelsea Studio A</div>
-            <div class="rental-card__desc">2,400 sq ft white cyc studio in Chelsea. Pre-rigged lighting grid, green room included.</div>
-            <div class="rental-card__footer">
-              <div class="rental-card__price">$1,800 <span>/ day</span></div>
-              <button class="rental-card__btn">Book Now</button>
-            </div>
-            <div class="rental-card__tag">📍 NYC Local Pick-up Only</div>
-          </div>
-        </div>
-
-        <div class="rental-card reveal">
-          <div class="rental-card__img">
-            <div class="rental-card__placeholder rental-card__placeholder--drone">🚁</div>
-            <span class="rental-card__badge rental-card__badge--limited">Limited</span>
-          </div>
-          <div class="rental-card__body">
-            <div class="rental-card__name">DJI Inspire 3</div>
-            <div class="rental-card__desc">Full-frame aerial cinema system. 8K ProRes RAW. Licensed operator available.</div>
-            <div class="rental-card__footer">
-              <div class="rental-card__price">$1,200 <span>/ day</span></div>
-              <button class="rental-card__btn">Book Now</button>
-            </div>
-            <div class="rental-card__tag">⚡ Low Availability</div>
-          </div>
-        </div>
-
-        <div class="rental-card reveal">
-          <div class="rental-card__img">
-            <div class="rental-card__placeholder rental-card__placeholder--audio">🎙️</div>
-            <span class="rental-card__badge rental-card__badge--value">Best Value</span>
-          </div>
-          <div class="rental-card__body">
-            <div class="rental-card__name">Sound Kit Pro</div>
-            <div class="rental-card__desc">Sennheiser MKH 416 + 4ch wireless + Sound Devices MixPre-6 recorder. Complete audio solution.</div>
-            <div class="rental-card__footer">
-              <div class="rental-card__price">$350 <span>/ day</span></div>
-              <button class="rental-card__btn">Book Now</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════════════════════════════════════
-       FOUNDER'S VISION
-       ════════════════════════════════════════ -->
-  <section class="founder reveal">
-    <div class="container">
-      <div class="founder__grid">
-        <div class="founder__portrait">
-          <div class="founder__portrait-placeholder">CHRIS ALVAREZ<br>B&W PORTRAIT</div>
-        </div>
-        <div>
-          <p class="section-header__overtitle">Founder's Vision</p>
-          <h2 class="founder__name">Chris Alvarez</h2>
-          <p class="founder__role">Founder & Creative Director</p>
-          <p class="founder__quote">"We don't just film events. We fund missions."</p>
-          <p class="founder__bio">Chris leads an innovative NYC crew that has worked with Columbia, NYU, Meta, and the United Nations. From a single camera to a 12-camera live broadcast, Transcendent Enterprise has been the backbone of high-stakes productions since 2004.</p>
-          <div class="founder__stats">
-            <div>
-              <div class="founder__stat-number">18+</div>
-              <div class="founder__stat-label">Years Experience</div>
-            </div>
-            <div>
-              <div class="founder__stat-number">6,500+</div>
-              <div class="founder__stat-label">Productions</div>
-            </div>
-            <div>
-              <div class="founder__stat-number">$100M+</div>
-              <div class="founder__stat-label">Raised for Clients</div>
-            </div>
-          </div>
-          <div class="founder__signature">Chris Alvarez</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════════════════════════════════════
-       FOOTER
-       ════════════════════════════════════════ -->
-  <footer class="footer" id="contact">
-    <div class="container">
-      <div class="footer__top">
-        <div>
-          <div class="footer__brand-name">TRANSCENDENT</div>
-          <p class="footer__brand-desc">Full-service video production, live streaming, and equipment rentals. Based in the heart of Manhattan.</p>
-        </div>
-        <div>
-          <div class="footer__col-title">Services</div>
-          <ul class="footer__col-links">
-            <li><a href="#services">Video Production</a></li>
-            <li><a href="#services">Live Streaming</a></li>
-            <li><a href="#services">Brand Films</a></li>
-            <li><a href="#rentals">Equipment Rental</a></li>
-          </ul>
-        </div>
-        <div>
-          <div class="footer__col-title">Company</div>
-          <ul class="footer__col-links">
-            <li><a href="#">About</a></li>
-            <li><a href="#work">Portfolio</a></li>
-            <li><a href="#">Careers</a></li>
-            <li><a href="#">Blog</a></li>
-          </ul>
-        </div>
-        <div>
-          <div class="footer__col-title">Contact</div>
-          <ul class="footer__col-links">
-            <li><a href="tel:8002691173">(800) 269-1173</a></li>
-            <li><a href="mailto:info@transcendententerprise.com">info@transcendententerprise.com</a></li>
-            <li>121 W 27th Street</li>
-            <li>Suite 1003C, New York, NY 10001</li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer__bottom">
-        <span class="footer__copy">&copy; 2026 Transcendent Enterprise. All rights reserved.</span>
-        <div class="footer__socials">
-          <a href="#" class="footer__social" aria-label="Instagram">IG</a>
-          <a href="#" class="footer__social" aria-label="YouTube">YT</a>
-          <a href="#" class="footer__social" aria-label="LinkedIn">LI</a>
-          <a href="#" class="footer__social" aria-label="Vimeo">VM</a>
-        </div>
-      </div>
-    </div>
-  </footer>
+  </div>
 
   <!-- ════════════════════════════════════════
        LIVE OVERLAY
@@ -1868,317 +753,249 @@
       <h2 style="font-family:var(--font-heading); font-size:clamp(1.5rem,4vw,2.5rem); letter-spacing:5px; margin-bottom:24px;">ON-AIR NOW</h2>
       <div class="live-overlay__viewport">
         <div style="text-align:center; padding:40px;">
-          <div class="live-overlay__lock">🔒</div>
+          <div class="live-overlay__lock">&#x1F512;</div>
           <div class="live-overlay__private-title">PRIVATE EXECUTIVE BROADCAST</div>
           <p class="live-overlay__private-desc">We are currently managing a high-security executive stream for a Fortune 500 client. Our 12-camera, zero-lag infrastructure handles 500K+ concurrent viewers.</p>
           <p style="margin-top:20px; font-size:0.8rem; color:var(--blue);">Next public broadcast: Carnegie Hall Annual Gala — March 15</p>
         </div>
       </div>
-      <a href="#services" class="btn btn--primary" onclick="toggleLiveOverlay()">Secure Your Live Event Date</a>
+      <a href="#contact" class="btn btn--primary" onclick="toggleLiveOverlay()">Secure Your Live Event Date</a>
     </div>
   </div>
 
   <!-- ════════════════════════════════════════
-       JAVASCRIPT
+       AUTHORITY TICKER
        ════════════════════════════════════════ -->
+  <div class="ticker">
+    <div class="ticker__track">
+      <span>6,500+ PRODUCTIONS &nbsp;// &nbsp;18+ YEARS IN BUSINESS &nbsp;// &nbsp;$100M+ RAISED AT EVENTS &nbsp;// &nbsp;NYC TO LONDON TO GHANA &nbsp;// &nbsp;500K+ LIVE VIEWERS &nbsp;// &nbsp;24HR TURNAROUND &nbsp;// &nbsp;EST. 2004 &nbsp;// &nbsp;</span>
+      <span>6,500+ PRODUCTIONS &nbsp;// &nbsp;18+ YEARS IN BUSINESS &nbsp;// &nbsp;$100M+ RAISED AT EVENTS &nbsp;// &nbsp;NYC TO LONDON TO GHANA &nbsp;// &nbsp;500K+ LIVE VIEWERS &nbsp;// &nbsp;24HR TURNAROUND &nbsp;// &nbsp;EST. 2004 &nbsp;// &nbsp;</span>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       GEOGRAPHIC ANCHOR
+       ════════════════════════════════════════ -->
+  <div class="geo-anchor">40.7128° N, 74.0060° W</div>
+
+  <!-- Shared JS -->
+  <script src="js/global.js"></script>
+
+  <!-- Homepage: Qualification Flow + Drawer Engine + Command Center -->
   <script>
-    // ─── Qualification Flow State ───
-    const qualState = {
+    // ─── Qualification State ───
+    var qualState = {
       objective: null,
       brandStrategy: null,
       timeline: null,
-      budget: null,
+      budget: null
     };
 
-    const ctaMap = {
-      'Raise Capital': { text: 'Book Capital Strategy Session' },
-      'Recruit Talent': { text: 'Book Talent Campaign Call' },
-      'Scale Brand': { text: 'Book Brand Strategy Session' },
-      'Live Stream': { text: 'Check Event Availability' },
-      'Podcast & Thought Leadership': { text: 'Book Podcast Studio Session' },
-      'Conferences & Summits': { text: 'Reserve Event Coverage Team' },
+    var ctaMap = {
+      'Corporate Video': { text: 'Confirm Strategy Selection', href: '#contact' },
+      'Event Coverage': { text: 'Confirm Strategy Selection', href: '#contact' },
+      'Live Stream': { text: 'Confirm Strategy Selection', href: '#contact' },
+      'Podcast & Content': { text: 'Confirm Strategy Selection', href: '#contact' },
+      'Photography': { text: 'Confirm Strategy Selection', href: '#contact' },
+      'Equipment Rental': { text: 'Browse Equipment', href: 'equipment-rentals.html' }
     };
 
-    const strategyMap = {
-      'Innovation Launch': 'Strategy: Architecting a Global Launch for Market Dominance',
-      'Visionary Series': 'Strategy: High-Trust Documentary Authority',
-      'Multi-Platform Dominance': 'Strategy: Cinematic Social Ecosystem',
-      'Global Enterprise Suite': 'Strategy: Unified International Narrative',
+    var strategyMap = {
+      'Innovation Launch': 'Strategy: Architecting cinematic launch campaigns for global tech leaders.',
+      'Visionary Series': 'Strategy: Documentary-style authority building for institutional brands.',
+      'Multi-Platform Dominance': 'Strategy: 1 hero film + 10 social cuts across LinkedIn, YouTube & broadcast.',
+      'Global Enterprise Suite': 'Strategy: Unified international narrative across NYC, London & beyond.'
     };
 
+    // ─── Select an option ───
     function selectOption(step, el) {
-      const value = el.dataset.value;
-      el.parentElement.querySelectorAll('.qual__card').forEach(c => c.classList.remove('selected'));
+      el.parentElement.querySelectorAll('.qual__card').forEach(function(c) {
+        c.classList.remove('selected');
+      });
       el.classList.add('selected');
+
+      var value = el.dataset.value;
 
       if (step === 1) {
         qualState.objective = value;
         qualState.brandStrategy = null;
-        // Show/hide the 1.5 progress dot
-        const dot15 = document.querySelector('.qual__progress-dot[data-step="1.5"]');
-        if (value === 'Scale Brand') {
-          dot15.classList.remove('hidden');
-          setTimeout(() => advanceStep(1.5), 300);
-        } else {
-          dot15.classList.add('hidden');
-          setTimeout(() => advanceStep(2), 300);
-        }
-        return;
+        var dot15 = document.querySelector('.qual__progress-dot[data-step="1.5"]');
+        dot15.classList.add('hidden');
+        setTimeout(function() { advanceStep(2); }, 400);
+      } else if (step === 2) {
+        qualState.timeline = value;
+        setTimeout(function() { advanceStep(3); }, 400);
+      } else if (step === 3) {
+        qualState.budget = value;
+        populateSummary();
+        setTimeout(function() { advanceStep(4); }, 400);
       }
-      if (step === 2) qualState.timeline = value;
-      if (step === 3) qualState.budget = value;
-
-      setTimeout(() => advanceStep(step + 1), 300);
     }
 
+    // ─── Select brand strategy (step 1.5) ───
     function selectBrandStrategy(el) {
-      const value = el.dataset.value;
-      el.parentElement.querySelectorAll('.qual__card').forEach(c => c.classList.remove('selected'));
+      el.parentElement.querySelectorAll('.qual__card').forEach(function(c) {
+        c.classList.remove('selected');
+      });
       el.classList.add('selected');
-      qualState.brandStrategy = value;
-      setTimeout(() => advanceStep(2), 300);
+      qualState.brandStrategy = el.dataset.value;
+      setTimeout(function() { advanceStep(2); }, 400);
     }
 
+    // ─── Advance to next step ───
     function advanceStep(nextStep) {
-      document.querySelectorAll('.qual__step').forEach(s => {
-        s.classList.remove('active');
-        s.style.display = 'none';
+      var current = document.querySelector('.qual__step.active');
+      var next = document.querySelector('.qual__step[data-step="' + nextStep + '"]');
+      if (!current || !next) return;
+
+      document.querySelectorAll('.qual__progress-dot').forEach(function(dot) {
+        var ds = parseFloat(dot.dataset.step);
+        if (ds <= nextStep) {
+          dot.classList.add('filled');
+        } else {
+          dot.classList.remove('filled');
+        }
       });
 
-      const next = document.querySelector(`.qual__step[data-step="${nextStep}"]`);
-      if (next) {
-        next.style.display = 'block';
-        next.classList.add('active');
-        gsap.fromTo(next, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
-      }
-
-      // Update progress dots
-      document.querySelectorAll('.qual__progress-dot:not(.hidden)').forEach(dot => {
-        const dotStep = parseFloat(dot.dataset.step);
-        dot.classList.toggle('filled', dotStep <= nextStep);
+      gsap.to(current, {
+        opacity: 0, y: -30, duration: 0.35, ease: 'power2.in',
+        onComplete: function() {
+          current.classList.remove('active');
+          current.style.opacity = '';
+          current.style.transform = '';
+          next.classList.add('active');
+          gsap.fromTo(next,
+            { opacity: 0, y: 30 },
+            { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }
+          );
+          var cmdCenter = document.getElementById('cmdCenter');
+          if (cmdCenter) cmdCenter.scrollTo({ top: 0, behavior: 'smooth' });
+        }
       });
-
-      if (nextStep === 4) populateSummary();
     }
 
+    // ─── Go back a step ───
     function goBack(toStep) {
-      advanceStep(toStep);
+      var current = document.querySelector('.qual__step.active');
+      var prev = document.querySelector('.qual__step[data-step="' + toStep + '"]');
+      if (!current || !prev) return;
+
+      document.querySelectorAll('.qual__progress-dot').forEach(function(dot) {
+        var ds = parseFloat(dot.dataset.step);
+        if (ds <= toStep) {
+          dot.classList.add('filled');
+        } else {
+          dot.classList.remove('filled');
+        }
+      });
+
+      gsap.to(current, {
+        opacity: 0, y: 30, duration: 0.35, ease: 'power2.in',
+        onComplete: function() {
+          current.classList.remove('active');
+          current.style.opacity = '';
+          current.style.transform = '';
+          prev.classList.add('active');
+          gsap.fromTo(prev,
+            { opacity: 0, y: -30 },
+            { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }
+          );
+          var cmdCenter = document.getElementById('cmdCenter');
+          if (cmdCenter) cmdCenter.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
     }
 
+    // ─── Populate summary ───
     function populateSummary() {
       document.getElementById('sumObjective').textContent = qualState.objective || '—';
       document.getElementById('sumTimeline').textContent = qualState.timeline || '—';
+      document.getElementById('sumBudget').textContent = qualState.budget || '—';
 
-      // Hormozi: "Allocation for [Outcome]" instead of raw budget
-      const outcomeLabels = {
-        'Raise Capital': 'Fundraising Success Strategy',
-        'Recruit Talent': 'Talent Acquisition Campaign',
-        'Scale Brand': 'Brand Dominance Campaign',
-        'Live Stream': 'Live Production Infrastructure',
-        'Podcast & Thought Leadership': 'Authority Multiplier Content',
-        'Conferences & Summits': 'Global Event Documentation',
-      };
-      const outcomeLabel = outcomeLabels[qualState.objective] || 'Your Project';
-      document.getElementById('sumBudget').textContent = qualState.budget
-        ? `${qualState.budget} — ${outcomeLabel}`
-        : '—';
-
-      // Dynamic CTA
-      const cta = ctaMap[qualState.objective] || { text: 'Book a Strategy Session' };
-      document.getElementById('sumCta').textContent = cta.text;
-
-      // Strategy line for Scale Brand
-      const strategyEl = document.getElementById('sumStrategy');
+      var stratEl = document.getElementById('sumStrategy');
       if (qualState.brandStrategy && strategyMap[qualState.brandStrategy]) {
-        strategyEl.textContent = strategyMap[qualState.brandStrategy];
-        strategyEl.classList.add('visible');
+        stratEl.textContent = strategyMap[qualState.brandStrategy];
+        stratEl.style.display = 'block';
       } else {
-        strategyEl.classList.remove('visible');
+        stratEl.style.display = 'none';
       }
 
-      // Live Stream gets live specs button
-      const liveBtn = document.getElementById('sumLiveBtn');
+      var cta = ctaMap[qualState.objective];
+      if (cta) {
+        document.getElementById('sumCta').textContent = cta.text;
+        document.getElementById('sumCta').href = cta.href;
+      }
+
+      var liveBtn = document.getElementById('sumLiveBtn');
       if (qualState.objective === 'Live Stream') {
-        liveBtn.classList.add('visible');
+        liveBtn.style.display = 'inline-block';
       } else {
-        liveBtn.classList.remove('visible');
-      }
-
-      // Priority pulse on $50K+ selections
-      const priorityPulse = document.getElementById('priorityPulse');
-      const highBudget = qualState.budget && (qualState.budget.includes('50K') || qualState.budget.includes('150K'));
-      if (highBudget) {
-        priorityPulse.classList.add('visible');
-      } else {
-        priorityPulse.classList.remove('visible');
+        liveBtn.style.display = 'none';
       }
     }
 
-    // ─── Live Overlay ───
+    // ─── Live Overlay Toggle ───
     function toggleLiveOverlay() {
-      const overlay = document.getElementById('liveOverlay');
+      var overlay = document.getElementById('liveOverlay');
       if (overlay.classList.contains('open')) {
         gsap.to(overlay, {
-          opacity: 0, duration: 0.3, onComplete: () => {
+          opacity: 0, duration: 0.4, ease: 'power2.in',
+          onComplete: function() {
             overlay.classList.remove('open');
-            gsap.set(overlay, { opacity: 1 });
+            overlay.style.opacity = '';
+            document.body.style.overflow = '';
           }
         });
       } else {
         overlay.classList.add('open');
-        gsap.fromTo(overlay, { opacity: 0 }, { opacity: 1, duration: 0.4 });
+        document.body.style.overflow = 'hidden';
+        gsap.fromTo(overlay,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.5, ease: 'power2.out' }
+        );
       }
     }
 
-    // Close overlay on Escape
-    document.addEventListener('keydown', (e) => {
+    // ─── Nav live indicator opens overlay ───
+    document.getElementById('liveIndicator').onclick = function() {
+      toggleLiveOverlay();
+    };
+
+    // ─── Escape key closes overlay / drawer / command center ───
+    document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
-        const overlay = document.getElementById('liveOverlay');
-        if (overlay.classList.contains('open')) toggleLiveOverlay();
+        // Close command center first
+        var cmdCenter = document.getElementById('cmdCenter');
+        if (cmdCenter && cmdCenter.classList.contains('open')) {
+          closeCommandCenter();
+          return;
+        }
+        // Close any open drawer
+        var drawers = document.querySelectorAll('.drawer');
+        for (var i = 0; i < drawers.length; i++) {
+          if (drawers[i].style.display === 'block' || drawers[i].style.display === 'flex') {
+            var id = drawers[i].id.replace('drawer-', '');
+            closeDrawer(id);
+            return;
+          }
+        }
+        // Close live overlay
+        var overlay = document.getElementById('liveOverlay');
+        if (overlay && overlay.classList.contains('open')) {
+          toggleLiveOverlay();
+        }
       }
     });
 
-    // ─── Navigation ───
-    const nav = document.getElementById('nav');
-    const navToggle = document.getElementById('navToggle');
-    const navLinks = document.getElementById('navLinks');
-
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 80);
-    });
-
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('active');
-      navLinks.classList.toggle('open');
-    });
-
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navToggle.classList.remove('active');
-        navLinks.classList.remove('open');
-      });
-    });
-
-    // ─── Custom Magnetic Cursor ───
-    const cursor = document.getElementById('custom-cursor');
-    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
-
-    if (!isTouchDevice && cursor) {
-      document.addEventListener('mousemove', (e) => {
-        gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.15, ease: 'power2.out' });
-      });
-
-      // Expand cursor on work cards
-      document.querySelectorAll('.work__card').forEach(card => {
-        card.addEventListener('mouseenter', () => {
-          cursor.classList.add('expanded');
-        });
-        card.addEventListener('mouseleave', () => {
-          cursor.classList.remove('expanded');
-        });
-      });
-
-      // Subtle grow on interactive elements
-      document.querySelectorAll('a, button, .qual__card, .live-indicator').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-          if (!cursor.classList.contains('expanded')) {
-            gsap.to(cursor, { scale: 2, duration: 0.2 });
-          }
-        });
-        el.addEventListener('mouseleave', () => {
-          if (!cursor.classList.contains('expanded')) {
-            gsap.to(cursor, { scale: 1, duration: 0.2 });
-          }
-        });
-      });
-    }
-
-    // ─── GSAP Animations ───
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Hero entrance
-    const heroTl = gsap.timeline({ delay: 0.3 });
-    gsap.set(['.hero__overtitle', '.hero__title', '.hero__tagline', '.hero__cta-group'], { y: 30 });
-    heroTl
-      .to('.hero__overtitle', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' })
-      .to('.hero__title', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, '-=0.5')
-      .to('.hero__tagline', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.6')
-      .to('.hero__cta-group', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.5')
-      .to('.hero__scroll', { opacity: 0.6, duration: 1 }, '-=0.3');
-
-    // Scroll reveals
-    gsap.utils.toArray('.reveal').forEach(el => {
-      gsap.to(el, {
-        opacity: 1, y: 0, duration: 0.8, ease: 'power2.out',
-        scrollTrigger: { trigger: el, start: 'top 85%', once: true },
-      });
-    });
-
-    // Coffee & TV signature — work cards scale into viewport
-    gsap.utils.toArray('.work__card').forEach(card => {
-      gsap.fromTo(card, { scale: 0.9 }, {
-        scale: 1, ease: 'none',
-        scrollTrigger: { trigger: card, start: 'top 90%', end: 'top 30%', scrub: 1 },
-      });
-    });
-
-    // Mobile: auto-reveal work card overlays on scroll (no hover needed)
-    if (isTouchDevice) {
-      gsap.utils.toArray('.work__card-overlay').forEach(overlay => {
-        gsap.to(overlay, {
-          opacity: 1, duration: 0.5,
-          scrollTrigger: { trigger: overlay.parentElement, start: 'top 60%', end: 'top 30%', scrub: 1 },
-        });
-      });
-    }
-
-    // Rental cards stagger
-    ScrollTrigger.batch('.rental-card', {
-      onEnter: batch => {
-        gsap.to(batch, { opacity: 1, y: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out' });
-      },
-      start: 'top 85%',
-      once: true,
-    });
-
-    // Client logos stagger
-    gsap.utils.toArray('.clients__logo').forEach((logo, i) => {
-      gsap.fromTo(logo, { opacity: 0, y: 15 }, {
-        opacity: 1, y: 0, duration: 0.5, delay: i * 0.08,
-        scrollTrigger: { trigger: '.clients__grid', start: 'top 85%', once: true },
-      });
-    });
-
-    // Parallax on hero content
-    gsap.to('.hero__content', {
-      y: 100, ease: 'none',
-      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 },
-    });
-
-    // Founder stats counter animation
-    gsap.utils.toArray('.founder__stat-number').forEach(stat => {
-      gsap.from(stat, {
-        opacity: 0, y: 20, duration: 0.6,
-        scrollTrigger: { trigger: stat, start: 'top 85%', once: true },
-      });
-    });
-
-    // ─── Scarcity Banner ───
-    // Drop down after 2s delay, then hide on scroll
-    const banner = document.getElementById('scarcityBanner');
-    gsap.to(banner, {
-      y: 0, duration: 0.6, ease: 'power2.out', delay: 2,
-    });
-
-    ScrollTrigger.create({
-      start: 'top -80',
-      onUpdate: (self) => {
-        if (self.direction === 1 && self.scroll() > 100) {
-          gsap.to(banner, { y: '-100%', duration: 0.4, ease: 'power2.in' });
-        } else if (self.scroll() < 50) {
-          gsap.to(banner, { y: 0, duration: 0.4, ease: 'power2.out' });
+    // ─── Browser back closes drawer ───
+    window.addEventListener('popstate', function(e) {
+      var drawers = document.querySelectorAll('.drawer');
+      drawers.forEach(function(d) {
+        if (d.style.display === 'block' || d.style.display === 'flex') {
+          var id = d.id.replace('drawer-', '');
+          closeDrawer(id, true);
         }
-      },
+      });
     });
   </script>
 

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equipment Rentals — Transcendent Enterprise | NYC</title>
+  <meta name="description" content="Cinema-grade camera, lens, lighting, and audio rentals in NYC. RED, ARRI, Cooke, DJI available from our Chelsea studio.">
+  <link rel="canonical" href="https://transcendententerprise.com/equipment-rentals">
+  <meta property="og:title" content="Equipment Rentals — Transcendent Enterprise | NYC">
+  <meta property="og:description" content="Cinema-grade camera, lens, lighting, and audio rentals in NYC. RED, ARRI, Cooke, DJI available.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://transcendententerprise.com/equipment-rentals">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="css/global.css">
+</head>
+<body>
+
+  <!-- Custom Cursor (hidden on touch) -->
+  <div id="custom-cursor"><span class="cursor-text">VIEW</span></div>
+
+  <!-- ════════════════════════════════════════
+       NAVIGATION
+       ════════════════════════════════════════ -->
+  <nav class="nav" id="nav">
+    <div class="container">
+      <a href="index.html" class="nav__logo">TRANSCENDENT</a>
+      <button class="nav__toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span>
+      </button>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="services.html">Services</a></li>
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="index.html#story">Story</a></li>
+        <li><a href="equipment-rentals.html" class="active">Rentals</a></li>
+        <li><a href="blog.html">Editorial</a></li>
+        <li>
+          <div class="live-indicator" id="liveIndicator" onclick="toggleLiveOverlay()">
+            <span class="live-dot"></span>
+            <span class="live-text">LIVE</span>
+          </div>
+        </li>
+        <li><a href="index.html#contact" class="nav__cta">Get Started</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════════════
+       HERO
+       ════════════════════════════════════════ -->
+  <section class="hero hero--sub" id="hero">
+    <div class="hero__bg"></div>
+    <div class="hero__grain"></div>
+    <div class="hero__content">
+      <p class="hero__overtitle">Equipment &amp; Studio Rentals</p>
+      <h1 class="hero__title">CINEMA-GRADE GEAR AVAILABLE TODAY</h1>
+      <p class="hero__tagline">Professional cameras, lenses, lighting, audio, and studio space &mdash; all from our Chelsea facility at 121 W 27th Street.</p>
+      <div class="hero__cta-group">
+        <a href="#catalog" class="btn btn--primary">Browse Catalog</a>
+        <a href="office-space.html" class="btn btn--ghost">Tour Studio 1003C</a>
+      </div>
+    </div>
+    <div class="hero__scroll">
+      <span class="hero__scroll-text">Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       FULL RENTAL CATALOG
+       ════════════════════════════════════════ -->
+  <section class="rentals" id="catalog">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-header__overtitle">Full Catalog</p>
+        <h2 class="section-header__title">PRODUCTION-READY RENTALS</h2>
+      </div>
+
+      <div class="rentals__grid">
+
+        <!-- 1. RED V-Raptor XL -->
+        <div class="rental-card reveal">
+          <div class="rental-card__img">
+            <div class="rental-card__placeholder rental-card__placeholder--cam">&#x1F3A5;</div>
+            <span class="rental-card__badge rental-card__badge--popular">Most Popular</span>
+          </div>
+          <div class="rental-card__body">
+            <div class="rental-card__name">RED V-Raptor XL</div>
+            <div class="rental-card__desc">8K cinema camera with global shutter. Perfect for commercial and narrative shoots.</div>
+            <div class="rental-card__footer">
+              <div class="rental-card__price">$850 <span>/ day</span></div>
+              <button class="rental-card__btn">Book Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. ARRI Alexa Mini LF -->
+        <div class="rental-card reveal">
+          <div class="rental-card__img">
+            <div class="rental-card__placeholder rental-card__placeholder--cam">&#x1F3A5;</div>
+            <span class="rental-card__badge rental-card__badge--popular">Featured</span>
+          </div>
+          <div class="rental-card__body">
+            <div class="rental-card__name">ARRI Alexa Mini LF</div>
+            <div class="rental-card__desc">Large format cinema camera. Netflix-approved for original productions.</div>
+            <div class="rental-card__footer">
+              <div class="rental-card__price">$1,200 <span>/ day</span></div>
+              <button class="rental-card__btn">Book Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Cooke S7/i Prime Set -->
+        <div class="rental-card reveal">
+          <div class="rental-card__img">
+            <div class="rental-card__placeholder rental-card__placeholder--lens">&#x1F52D;</div>
+            <span class="rental-card__badge rental-card__badge--value">Best Value</span>
+          </div>
+          <div class="rental-card__body">
+            <div class="rental-card__name">Cooke S7/i Prime Set</div>
+            <div class="rental-card__desc">Full-frame cinema primes (25, 32, 50, 75, 100mm). The Cooke Look&trade;.</div>
+            <div class="rental-card__footer">
+              <div class="rental-card__price">$600 <span>/ day</span></div>
+              <button class="rental-card__btn">Book Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. ARRI SkyPanel S360-C -->
+        <div class="rental-card reveal">
+          <div class="rental-card__img">
+            <div class="rental-card__placeholder rental-card__placeholder--light">&#x1F4A1;</div>
+          </div>
+          <div class="rental-card__body">
+            <div class="rental-card__name">ARRI SkyPanel S360-C</div>
+            <div class="rental-card__desc">Premium soft LED panel with full RGBW color control for any lighting scenario.</div>
+            <div class="rental-card__footer">
+              <div class="rental-card__price">$400 <span>/ day</span></div>
+              <button class="rental-card__btn">Book Now</button>
+            </div>
+            <div class="rental-card__tag">Low Availability</div>
+          </div>
+        </div>
+
+        <!-- 5. DJI Inspire 3 -->
+        <div class="rental-card reveal">
+          <div class="rental-card__img">
+            <div class="rental-card__placeholder rental-card__placeholder--drone">&#x1F681;</div>
+            <span class="rental-card__badge rental-card__badge--limited">Limited</span>
+          </div>
+          <div class="rental-card__body">
+            <div class="rental-card__name">DJI Inspire 3</div>
+            <div class="rental-card__desc">8K ProRes RAW aerial cinema system with dual-operator control.</div>
+            <div class="rental-card__footer">
+              <div class="rental-card__price">$1,200 <span>/ day</span></div>
+              <button class="rental-card__btn">Book Now</button>
+            </div>
+            <div class="rental-card__tag">Low Availability</div>
+          </div>
+        </div>
+
+        <!-- 6. Sound Kit Pro -->
+        <div class="rental-card reveal">
+          <div class="rental-card__img">
+            <div class="rental-card__placeholder rental-card__placeholder--audio">&#x1F399;</div>
+            <span class="rental-card__badge rental-card__badge--value">Best Value</span>
+          </div>
+          <div class="rental-card__body">
+            <div class="rental-card__name">Sound Kit Pro</div>
+            <div class="rental-card__desc">Sennheiser MKH 416 shotgun + 4-channel wireless lav system + Sound Devices MixPre-6 recorder.</div>
+            <div class="rental-card__footer">
+              <div class="rental-card__price">$350 <span>/ day</span></div>
+              <button class="rental-card__btn">Book Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Grip & Electric Package -->
+        <div class="rental-card reveal">
+          <div class="rental-card__img">
+            <div class="rental-card__placeholder rental-card__placeholder--grip">&#x26A1;</div>
+          </div>
+          <div class="rental-card__body">
+            <div class="rental-card__name">Grip &amp; Electric Package</div>
+            <div class="rental-card__desc">C-stands, flags, silks, and a full grip truck for on-location productions.</div>
+            <div class="rental-card__footer">
+              <div class="rental-card__price">$500 <span>/ day</span></div>
+              <button class="rental-card__btn">Book Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. SmallHD Cine 24 Monitor -->
+        <div class="rental-card reveal">
+          <div class="rental-card__img">
+            <div class="rental-card__placeholder rental-card__placeholder--monitor">&#x1F5A5;</div>
+          </div>
+          <div class="rental-card__body">
+            <div class="rental-card__name">SmallHD Cine 24 Monitor</div>
+            <div class="rental-card__desc">24-inch 4K HDR reference monitor for on-set color-critical monitoring.</div>
+            <div class="rental-card__footer">
+              <div class="rental-card__price">$250 <span>/ day</span></div>
+              <button class="rental-card__btn">Book Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. Teradek Bolt 4K LT -->
+        <div class="rental-card reveal">
+          <div class="rental-card__img">
+            <div class="rental-card__placeholder rental-card__placeholder--wireless">&#x1F4E1;</div>
+            <span class="rental-card__badge rental-card__badge--popular">Popular</span>
+          </div>
+          <div class="rental-card__body">
+            <div class="rental-card__name">Teradek Bolt 4K LT</div>
+            <div class="rental-card__desc">Zero-delay wireless video transmission with 1500ft range for untethered monitoring.</div>
+            <div class="rental-card__footer">
+              <div class="rental-card__price">$300 <span>/ day</span></div>
+              <button class="rental-card__btn">Book Now</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       CTA SECTION
+       ════════════════════════════════════════ -->
+  <section class="cta-section reveal">
+    <div class="container">
+      <h2 class="cta-section__title">Need a Custom Package?</h2>
+      <a href="tel:8002691173" class="btn btn--primary btn--lg">Call Us: (800) 269-1173</a>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       FOOTER
+       ════════════════════════════════════════ -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer__top">
+        <div>
+          <div class="footer__brand-name">TRANSCENDENT</div>
+          <p class="footer__brand-desc">Full-service video production, live streaming, and equipment rentals. Based in the heart of Manhattan.</p>
+        </div>
+        <div>
+          <div class="footer__col-title">Services</div>
+          <ul class="footer__col-links">
+            <li><a href="corporate-video-production.html">Corporate Video</a></li>
+            <li><a href="live-streaming-services.html">Live Streaming</a></li>
+            <li><a href="event-video-production.html">Event Production</a></li>
+            <li><a href="non-profit-video.html">Fundraising Films</a></li>
+            <li><a href="brand-content.html">Brand Content</a></li>
+            <li><a href="healthcare-medical-video-production-service.html">Healthcare Video</a></li>
+            <li><a href="podcast-thought-leadership.html">Podcast Production</a></li>
+            <li><a href="conferences-events.html">Conferences</a></li>
+            <li><a href="higher-education-video-production-company.html">Education Video</a></li>
+            <li><a href="conference-video-production.html">Conference Production</a></li>
+            <li><a href="virtual-event-producer-nyc.html">Virtual Events</a></li>
+            <li><a href="promotional-video-services.html">Promotional Video</a></li>
+            <li><a href="video-studio-installation-company-nyc.html">Studio Installation</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Company</div>
+          <ul class="footer__col-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="equipment-rentals.html">Equipment</a></li>
+            <li><a href="office-space.html">Studio 1003C</a></li>
+            <li><a href="blog.html">Editorial</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Contact</div>
+          <ul class="footer__col-links">
+            <li><a href="tel:8002691173">(800) 269-1173</a></li>
+            <li><a href="mailto:info@transcendententerprise.com">info@transcendententerprise.com</a></li>
+            <li>121 W 27th Street</li>
+            <li>Suite 1003C, New York, NY 10001</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span class="footer__copy">&copy; 2026 Transcendent Enterprise. All rights reserved. <a href="privacy-policy.html" style="color:var(--white-muted); margin-left:16px;">Privacy</a> <a href="terms-of-use.html" style="color:var(--white-muted); margin-left:8px;">Terms</a></span>
+        <div class="footer__socials">
+          <a href="#" class="footer__social" aria-label="Instagram">IG</a>
+          <a href="#" class="footer__social" aria-label="YouTube">YT</a>
+          <a href="#" class="footer__social" aria-label="LinkedIn">LI</a>
+          <a href="#" class="footer__social" aria-label="Vimeo">VM</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ════════════════════════════════════════
+       LIVE OVERLAY
+       ════════════════════════════════════════ -->
+  <div class="live-overlay" id="liveOverlay">
+    <button class="live-overlay__close" onclick="toggleLiveOverlay()">&times;</button>
+    <div class="live-overlay__content">
+      <div class="live-overlay__status">
+        <span class="live-dot"></span>
+        <span class="live-text">LIVE BROADCAST</span>
+      </div>
+      <h2 style="font-family:var(--font-heading); font-size:clamp(1.5rem,4vw,2.5rem); letter-spacing:5px; margin-bottom:24px;">ON-AIR NOW</h2>
+      <div class="live-overlay__viewport">
+        <div style="text-align:center; padding:40px;">
+          <div class="live-overlay__lock">&#x1F512;</div>
+          <div class="live-overlay__private-title">PRIVATE EXECUTIVE BROADCAST</div>
+          <p class="live-overlay__private-desc">We are currently managing a high-security executive stream for a Fortune 500 client. Our 12-camera, zero-lag infrastructure handles 500K+ concurrent viewers.</p>
+          <p style="margin-top:20px; font-size:0.8rem; color:var(--blue);">Next public broadcast: Carnegie Hall Annual Gala &mdash; March 15</p>
+        </div>
+      </div>
+      <a href="index.html#story" class="btn btn--primary" onclick="toggleLiveOverlay()">Secure Your Live Event Date</a>
+    </div>
+  </div>
+
+  <!-- Shared JS -->
+  <script src="js/global.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Transcendent Enterprise | NYC Video Production</title>
+  <meta name="description" content="Contact Transcendent Enterprise for video production, live streaming, and equipment rentals in NYC. Call (800) 269-1173 or visit our studio at 121 W 27th Street.">
+  <link rel="canonical" href="https://transcendententerprise.com/contact">
+
+  <meta property="og:title" content="Contact — Transcendent Enterprise | NYC Video Production">
+  <meta property="og:description" content="Contact Transcendent Enterprise for video production, live streaming, and equipment rentals in NYC.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://transcendententerprise.com/contact">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <link rel="stylesheet" href="css/global.css">
+</head>
+<body>
+
+  <div id="custom-cursor"><span class="cursor-text">VIEW</span></div>
+
+  <nav class="nav" id="nav">
+    <div class="container">
+      <a href="index.html" class="nav__logo">TRANSCENDENT</a>
+      <button class="nav__toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span>
+      </button>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="services.html">Services</a></li>
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="index.html#story">Story</a></li>
+        <li><a href="equipment-rentals.html">Rentals</a></li>
+        <li><a href="blog.html">Editorial</a></li>
+        <li>
+          <div class="live-indicator" id="liveIndicator" onclick="toggleLiveOverlay()">
+            <span class="live-dot"></span>
+            <span class="live-text">LIVE</span>
+          </div>
+        </li>
+        <li><a href="index.html#contact" class="nav__cta">Get Started</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero hero--sub" id="hero">
+    <div class="hero__bg"></div>
+    <div class="hero__grain"></div>
+    <div class="hero__content">
+      <p class="hero__overtitle">Get in Touch</p>
+      <h1 class="hero__title">WORK WITH US</h1>
+      <p class="hero__tagline">We have over twenty years of experience creating video content for small and large businesses from all industries.</p>
+    </div>
+    <div class="hero__scroll">
+      <span class="hero__scroll-text">Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <section class="service-intro">
+    <div class="container">
+      <div class="service-intro__grid">
+        <div class="service-intro__text reveal">
+          <h2>Let's Start Your Project</h2>
+          <p>Reach out to our team in New York, NY today. Whether you need corporate video production, live streaming, event coverage, or equipment rentals — we are ready to help bring your vision to life.</p>
+
+          <form class="contact-form" action="https://form.jotform.com/200681243358049" method="GET" target="_blank">
+            <div class="contact-form__row">
+              <div class="contact-form__field">
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" name="first_name" required>
+              </div>
+              <div class="contact-form__field">
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" name="last_name" required>
+              </div>
+            </div>
+            <div class="contact-form__row">
+              <div class="contact-form__field">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+              <div class="contact-form__field">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone">
+              </div>
+            </div>
+            <div class="contact-form__field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" placeholder="Tell us about your project..."></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary">Send Message</button>
+          </form>
+        </div>
+
+        <div class="service-intro__visual reveal" style="font-size:1rem; text-align:left; display:flex; flex-direction:column; gap:24px;">
+          <div>
+            <div style="font-family:var(--font-heading); font-size:1.2rem; letter-spacing:2px; margin-bottom:8px;">OFFICE</div>
+            <p style="color:var(--white-muted); line-height:1.8;">121 W 27th Street<br>Suite 1003C<br>New York, NY 10001</p>
+          </div>
+          <div>
+            <div style="font-family:var(--font-heading); font-size:1.2rem; letter-spacing:2px; margin-bottom:8px;">PHONE</div>
+            <p><a href="tel:8002691173" style="color:var(--blue); text-decoration:none;">(800) 269-1173</a></p>
+          </div>
+          <div>
+            <div style="font-family:var(--font-heading); font-size:1.2rem; letter-spacing:2px; margin-bottom:8px;">EMAIL</div>
+            <p><a href="mailto:sayhi@t-enter.com" style="color:var(--blue); text-decoration:none;">sayhi@t-enter.com</a></p>
+          </div>
+          <div>
+            <div style="font-family:var(--font-heading); font-size:1.2rem; letter-spacing:2px; margin-bottom:8px;">HOURS</div>
+            <p style="color:var(--white-muted); line-height:1.8;">Monday — Friday: 10 AM — 6 PM<br>Saturday — Sunday: Closed</p>
+          </div>
+          <div>
+            <div style="font-family:var(--font-heading); font-size:1.2rem; letter-spacing:2px; margin-bottom:8px;">SERVICE AREAS</div>
+            <p style="color:var(--white-muted); line-height:1.8;">Manhattan &bull; Brooklyn &bull; Queens &bull; Bronx &bull; Staten Island<br>New Jersey &bull; Connecticut</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section reveal">
+    <div class="container">
+      <h2 class="cta-section__title">Prefer to Request a Quote Directly?</h2>
+      <p class="cta-section__desc">Use our detailed quote request form to tell us about your project scope, timeline, and budget.</p>
+      <a href="https://form.jotform.com/200681243358049" target="_blank" class="btn btn--primary btn--lg">Request a Quote</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div>
+          <div class="footer__brand-name">TRANSCENDENT</div>
+          <p class="footer__brand-desc">Full-service video production, live streaming, and equipment rentals. Based in the heart of Manhattan.</p>
+        </div>
+        <div>
+          <div class="footer__col-title">Services</div>
+          <ul class="footer__col-links">
+            <li><a href="corporate-video-production.html">Corporate Video</a></li>
+            <li><a href="live-streaming-services.html">Live Streaming</a></li>
+            <li><a href="event-video-production.html">Event Production</a></li>
+            <li><a href="non-profit-video.html">Fundraising Films</a></li>
+            <li><a href="brand-content.html">Brand Content</a></li>
+            <li><a href="healthcare-medical-video-production-service.html">Healthcare Video</a></li>
+            <li><a href="podcast-thought-leadership.html">Podcast Production</a></li>
+            <li><a href="conferences-events.html">Conferences</a></li>
+            <li><a href="higher-education-video-production-company.html">Education Video</a></li>
+            <li><a href="conference-video-production.html">Conference Production</a></li>
+            <li><a href="virtual-event-producer-nyc.html">Virtual Events</a></li>
+            <li><a href="promotional-video-services.html">Promotional Video</a></li>
+            <li><a href="video-studio-installation-company-nyc.html">Studio Installation</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Company</div>
+          <ul class="footer__col-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="equipment-rentals.html">Equipment</a></li>
+            <li><a href="office-space.html">Studio 1003C</a></li>
+            <li><a href="blog.html">Editorial</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Contact</div>
+          <ul class="footer__col-links">
+            <li><a href="tel:8002691173">(800) 269-1173</a></li>
+            <li><a href="mailto:sayhi@t-enter.com">sayhi@t-enter.com</a></li>
+            <li>121 W 27th Street</li>
+            <li>Suite 1003C, New York, NY 10001</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span class="footer__copy">&copy; 2026 Transcendent Enterprise. All rights reserved. <a href="privacy-policy.html" style="color:var(--white-muted); margin-left:16px;">Privacy</a> <a href="terms-of-use.html" style="color:var(--white-muted); margin-left:8px;">Terms</a></span>
+        <div class="footer__socials">
+          <a href="#" class="footer__social" aria-label="Instagram">IG</a>
+          <a href="#" class="footer__social" aria-label="YouTube">YT</a>
+          <a href="#" class="footer__social" aria-label="LinkedIn">LI</a>
+          <a href="#" class="footer__social" aria-label="Vimeo">VM</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="live-overlay" id="liveOverlay">
+    <button class="live-overlay__close" onclick="toggleLiveOverlay()">&times;</button>
+    <div class="live-overlay__content">
+      <div class="live-overlay__status">
+        <span class="live-dot"></span>
+        <span class="live-text">LIVE BROADCAST</span>
+      </div>
+      <h2 style="font-family:var(--font-heading); font-size:clamp(1.5rem,4vw,2.5rem); letter-spacing:5px; margin-bottom:24px;">ON-AIR NOW</h2>
+      <div class="live-overlay__viewport">
+        <div style="text-align:center; padding:40px;">
+          <div class="live-overlay__lock">&#x1F512;</div>
+          <div class="live-overlay__private-title">PRIVATE EXECUTIVE BROADCAST</div>
+          <p class="live-overlay__private-desc">We are currently managing a high-security executive stream for a Fortune 500 client. Our 12-camera, zero-lag infrastructure handles 500K+ concurrent viewers.</p>
+          <p style="margin-top:20px; font-size:0.8rem; color:var(--blue);">Next public broadcast: Carnegie Hall Annual Gala &mdash; March 15</p>
+        </div>
+      </div>
+      <a href="#contact" class="btn btn--primary" onclick="toggleLiveOverlay()">Secure Your Live Event Date</a>
+    </div>
+  </div>
+
+  <script src="js/global.js"></script>
+</body>
+</html>

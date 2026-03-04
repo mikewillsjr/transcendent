@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studio 1003C — Transcendent Enterprise | Chelsea, NYC</title>
+  <meta name="description" content="2,400 sq ft production studio in Chelsea, Manhattan. Pre-rigged lighting, green room, and post-production suite at 121 W 27th Street.">
+  <link rel="canonical" href="https://transcendententerprise.com/office-space">
+  <meta property="og:title" content="Studio 1003C — Transcendent Enterprise | Chelsea, NYC">
+  <meta property="og:description" content="2,400 sq ft production studio in Chelsea, Manhattan. Pre-rigged lighting, green room, and post-production suite.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://transcendententerprise.com/office-space">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="css/global.css">
+</head>
+<body>
+
+  <!-- Custom Cursor (hidden on touch) -->
+  <div id="custom-cursor"><span class="cursor-text">VIEW</span></div>
+
+  <!-- ════════════════════════════════════════
+       NAVIGATION
+       ════════════════════════════════════════ -->
+  <nav class="nav" id="nav">
+    <div class="container">
+      <a href="index.html" class="nav__logo">TRANSCENDENT</a>
+      <button class="nav__toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span>
+      </button>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="services.html">Services</a></li>
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="index.html#story">Story</a></li>
+        <li><a href="equipment-rentals.html">Rentals</a></li>
+        <li><a href="blog.html">Editorial</a></li>
+        <li>
+          <div class="live-indicator" id="liveIndicator" onclick="toggleLiveOverlay()">
+            <span class="live-dot"></span>
+            <span class="live-text">LIVE</span>
+          </div>
+        </li>
+        <li><a href="index.html#contact" class="nav__cta">Get Started</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════════════
+       HERO
+       ════════════════════════════════════════ -->
+  <section class="hero hero--sub" id="hero">
+    <div class="hero__bg"></div>
+    <div class="hero__grain"></div>
+    <div class="hero__content">
+      <p class="hero__overtitle">Studio 1003C &mdash; Chelsea, Manhattan</p>
+      <h1 class="hero__title">YOUR PRIVATE PRODUCTION FACILITY IN THE HEART OF NYC</h1>
+      <p class="hero__tagline">2,400 sq ft at 121 W 27th Street with pre-rigged lighting, green room, and full post-production suite.</p>
+      <div class="hero__cta-group">
+        <a href="#contact" class="btn btn--primary">Book Studio Time</a>
+        <a href="equipment-rentals.html" class="btn btn--ghost">View Equipment</a>
+      </div>
+    </div>
+    <div class="hero__scroll">
+      <span class="hero__scroll-text">Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       STATS BAR
+       ════════════════════════════════════════ -->
+  <section class="stats-bar reveal">
+    <div class="container">
+      <div class="stats-bar__grid">
+        <div class="stats-bar__item">
+          <div class="stats-bar__number">2,400</div>
+          <div class="stats-bar__label">Square Feet</div>
+        </div>
+        <div class="stats-bar__item">
+          <div class="stats-bar__number">16ft</div>
+          <div class="stats-bar__label">Ceiling Height</div>
+        </div>
+        <div class="stats-bar__item">
+          <div class="stats-bar__number">4</div>
+          <div class="stats-bar__label">Makeup Stations</div>
+        </div>
+        <div class="stats-bar__item">
+          <div class="stats-bar__number">24/7</div>
+          <div class="stats-bar__label">Access Available</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       SERVICE INTRO
+       ════════════════════════════════════════ -->
+  <section class="service-intro">
+    <div class="container">
+      <div class="service-intro__grid">
+        <div class="service-intro__text reveal">
+          <h2>A Studio Built for Perfection, Not Compromise</h2>
+          <p>Studio 1003C is not a shared coworking space with ring lights. It is a purpose-built, full-service production facility in the heart of Chelsea &mdash; one of Manhattan's most accessible creative districts. With 2,400 square feet of open floor space, 16-foot ceilings, and a permanently mounted ARRI SkyPanel lighting grid, your crew can walk in and start shooting within minutes, not hours.</p>
+          <p>The studio includes a private green room with four makeup stations, a client lounge with live monitor feed, and a dedicated post-production suite running DaVinci Resolve for on-site color grading and editing. Freight elevator access makes load-in effortless for even the largest productions.</p>
+          <p>Whether you are producing a Fortune 500 brand film, a multi-camera podcast, or a high-end fashion editorial, Studio 1003C gives you the infrastructure of a broadcast facility with the privacy of your own space.</p>
+        </div>
+        <div class="service-intro__visual reveal">
+          &#127970;
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       FEATURES
+       ════════════════════════════════════════ -->
+  <section class="features">
+    <div class="container">
+      <div class="features__grid">
+        <div class="feature-card reveal">
+          <div class="feature-card__icon">&#128161;</div>
+          <div class="feature-card__title">Pre-Rigged Lighting Grid</div>
+          <div class="feature-card__desc">ARRI SkyPanels permanently mounted on a full ceiling grid, ready to go the moment you walk in. Zero setup time means your crew spends every minute on creative, not infrastructure. Color temperature and intensity are adjustable on the fly for any mood or look.</div>
+        </div>
+
+        <div class="feature-card reveal">
+          <div class="feature-card__icon">&#128131;</div>
+          <div class="feature-card__title">Private Green Room</div>
+          <div class="feature-card__desc">A fully equipped talent prep area with four professional makeup stations, a comfortable lounge, and a live monitor feed from the main stage. Your talent stays relaxed, prepared, and camera-ready without ever stepping into the production chaos.</div>
+        </div>
+
+        <div class="feature-card reveal">
+          <div class="feature-card__icon">&#127916;</div>
+          <div class="feature-card__title">Post-Production Suite</div>
+          <div class="feature-card__desc">An on-site DaVinci Resolve color grading station and dedicated edit bay available for same-day rough cuts, color correction, and final delivery. Go from shooting to screening without leaving the building.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       CTA SECTION
+       ════════════════════════════════════════ -->
+  <section class="cta-section reveal">
+    <div class="container">
+      <h2 class="cta-section__title">Book Studio 1003C</h2>
+      <p class="cta-section__desc">Your private production facility in Chelsea, Manhattan. Pre-rigged lighting, green room, and post-production suite &mdash; all under one roof.</p>
+      <a href="tel:8002691173" class="btn btn--primary btn--lg">Call (800) 269-1173</a>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       FOOTER
+       ════════════════════════════════════════ -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer__top">
+        <div>
+          <div class="footer__brand-name">TRANSCENDENT</div>
+          <p class="footer__brand-desc">Full-service video production, live streaming, and equipment rentals. Based in the heart of Manhattan.</p>
+        </div>
+        <div>
+          <div class="footer__col-title">Services</div>
+          <ul class="footer__col-links">
+            <li><a href="corporate-video-production.html">Corporate Video</a></li>
+            <li><a href="live-streaming-services.html">Live Streaming</a></li>
+            <li><a href="event-video-production.html">Event Production</a></li>
+            <li><a href="non-profit-video.html">Fundraising Films</a></li>
+            <li><a href="brand-content.html">Brand Content</a></li>
+            <li><a href="healthcare-medical-video-production-service.html">Healthcare Video</a></li>
+            <li><a href="podcast-thought-leadership.html">Podcast Production</a></li>
+            <li><a href="conferences-events.html">Conferences</a></li>
+            <li><a href="higher-education-video-production-company.html">Education Video</a></li>
+            <li><a href="conference-video-production.html">Conference Production</a></li>
+            <li><a href="virtual-event-producer-nyc.html">Virtual Events</a></li>
+            <li><a href="promotional-video-services.html">Promotional Video</a></li>
+            <li><a href="video-studio-installation-company-nyc.html">Studio Installation</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Company</div>
+          <ul class="footer__col-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="equipment-rentals.html">Equipment</a></li>
+            <li><a href="office-space.html">Studio 1003C</a></li>
+            <li><a href="blog.html">Editorial</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Contact</div>
+          <ul class="footer__col-links">
+            <li><a href="tel:8002691173">(800) 269-1173</a></li>
+            <li><a href="mailto:info@transcendententerprise.com">info@transcendententerprise.com</a></li>
+            <li>121 W 27th Street</li>
+            <li>Suite 1003C, New York, NY 10001</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span class="footer__copy">&copy; 2026 Transcendent Enterprise. All rights reserved. <a href="privacy-policy.html" style="color:var(--white-muted); margin-left:16px;">Privacy</a> <a href="terms-of-use.html" style="color:var(--white-muted); margin-left:8px;">Terms</a></span>
+        <div class="footer__socials">
+          <a href="#" class="footer__social" aria-label="Instagram">IG</a>
+          <a href="#" class="footer__social" aria-label="YouTube">YT</a>
+          <a href="#" class="footer__social" aria-label="LinkedIn">LI</a>
+          <a href="#" class="footer__social" aria-label="Vimeo">VM</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ════════════════════════════════════════
+       LIVE OVERLAY
+       ════════════════════════════════════════ -->
+  <div class="live-overlay" id="liveOverlay">
+    <button class="live-overlay__close" onclick="toggleLiveOverlay()">&times;</button>
+    <div class="live-overlay__content">
+      <div class="live-overlay__status">
+        <span class="live-dot"></span>
+        <span class="live-text">LIVE BROADCAST</span>
+      </div>
+      <h2 style="font-family:var(--font-heading); font-size:clamp(1.5rem,4vw,2.5rem); letter-spacing:5px; margin-bottom:24px;">ON-AIR NOW</h2>
+      <div class="live-overlay__viewport">
+        <div style="text-align:center; padding:40px;">
+          <div class="live-overlay__lock">&#128274;</div>
+          <div class="live-overlay__private-title">PRIVATE EXECUTIVE BROADCAST</div>
+          <p class="live-overlay__private-desc">We are currently managing a high-security executive stream for a Fortune 500 client. Our 12-camera, zero-lag infrastructure handles 500K+ concurrent viewers.</p>
+          <p style="margin-top:20px; font-size:0.8rem; color:var(--blue);">Next public broadcast: Carnegie Hall Annual Gala &mdash; March 15</p>
+        </div>
+      </div>
+      <a href="index.html#story" class="btn btn--primary" onclick="toggleLiveOverlay()">Secure Your Live Event Date</a>
+    </div>
+  </div>
+
+  <!-- Shared JS -->
+  <script src="js/global.js"></script>
+
+</body>
+</html>
