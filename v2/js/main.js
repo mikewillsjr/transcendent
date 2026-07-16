@@ -104,7 +104,7 @@
         if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
         else { v.pause(); }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.01, rootMargin: '400px 0px' });
     vids.forEach(function (v) { vio.observe(v); });
   }
 })();
